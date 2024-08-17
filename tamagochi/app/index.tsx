@@ -1,17 +1,36 @@
 import CharacterCard from "@/components/CharacterCard";
-import ListHeader from "@/components/ListHeader";
+import Header from "@/components/Header";
+import { Link } from "expo-router";
 import React from "react";
-import {View, Text} from 'react-native';
+import { View, Text, Button, StyleSheet } from 'react-native';
+
+const styles = StyleSheet.create({
+    buttonContainer: {
+        alignItems: "center",
+        marginTop: 5
+    },
+    buttonView: {
+        width: 150,
+        height: 40
+    }
+})
 
 const index = () => {
-    
-    return (
-       <View>
-        <ListHeader/>
-        <CharacterCard/>
-        <CharacterCard/>
 
-       </View> 
+    return (
+        <View>
+            <Header title="Seus Tamagochis" color="slateblue" />
+            <View style={styles.buttonContainer}>
+                <View style={styles.buttonView}>
+                    <Link href={"/createTamagochi"}>
+                        <Button title="Novo Tamagochi" color={"#08c935"} />
+                    </Link>
+                </View>
+            </View>
+            <CharacterCard />
+            <CharacterCard />
+
+        </View>
     );
 }
 
