@@ -1,7 +1,7 @@
 # Tamagochi (pensando em um titulo mais original..)
-    O projeto na construção de aplicativo de tamagochi (bichinho virtual),
-    utilizando a tecnologia Rect Native. O aplicativo seguirá a abordagem offline
-    first.
+O projeto na construção de aplicativo de tamagochi (bichinho virtual),
+utilizando a tecnologia Rect Native. O aplicativo seguirá a abordagem offline
+first.
 
 ##  Instalação
     
