@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
+import StatusCalculation from "./StatusCalculation";
 const style = StyleSheet.create({
     cardContainer: {
         marginTop: 50,
-        backgroundColor: 'red',
+        backgroundColor: '#FADA5E',
         height: 140,
         flexDirection: "row",
         alignItems: 'center',
         gap: 50,
+        borderWidth: 3,
     },
     CharacterText: {
         fontFamily: "Verdana",
@@ -21,26 +23,9 @@ const style = StyleSheet.create({
     }
 })
 const CharacterCard = () => {
-    let CharacterStatus:number = 2
-    let CharacterTextStatus:string = '0'
-
-    const [status, setStatus] = useState<string>('');
-    useEffect(() => {
-        if(CharacterStatus >= 1 && CharacterStatus <= 50){
-            CharacterTextStatus = "Critíco"
-        }if(CharacterStatus >= 51 && CharacterStatus <= 100){
-            CharacterTextStatus = "Muito Triste"
-        }if(CharacterStatus >= 101 && CharacterStatus <= 150){
-            CharacterTextStatus = "Triste"
-        }if(CharacterStatus >= 151 && CharacterStatus <= 200){
-            CharacterTextStatus = "Ok"
-        }if(CharacterStatus >= 201 && CharacterStatus <= 250){
-            CharacterTextStatus = "Bem"
-        }if(CharacterStatus >= 252 && CharacterStatus <= 300){
-            CharacterTextStatus = "Muito Bem"
-        }
-        setStatus(CharacterTextStatus);
-    }, [CharacterStatus])
+    let fome:number = 40
+    let diversao:number = 40
+    let sono:number = 100
     return (
         <View style={style.cardContainer}>
             <View style={style.CardImage}>
@@ -59,7 +44,7 @@ const CharacterCard = () => {
             </Text>
 
             <Text>
-                {status}
+                <StatusCalculation fome={fome} diversao={diversao} sono={sono}/>
             </Text>
 
            </View>

@@ -1,0 +1,15 @@
+purples:
+ #6A0D91
+ #9B7DFF
+ #4B0082
+ 
+yellows:
+ #FADA5E 
+ #D4A000 
+ #B89B45 
+ #A67B00
+ 
+ RED: 
+ #EEC1C1
+ GREEN: 
+ #C9E3B4
