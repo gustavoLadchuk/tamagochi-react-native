@@ -1,8 +1,56 @@
 import Header from "@/components/Header";
 import { Button, StyleSheet, Text, TextInput, View, Image, Pressable, ImageSourcePropType } from "react-native";
-import tamagochiStyle from '../assets/constants/style'
 import { useState } from "react";
 import { FlatList } from "react-native-gesture-handler";
+
+const styles = StyleSheet.create({
+    petContainer: {
+        width: 70,
+        height: 70,
+        borderStyle: "solid",
+        borderWidth: 3,
+        alignItems: "center",
+        justifyContent: "center",
+        marginHorizontal: 7
+    },
+    input: {
+        height: 40,
+        width: "70%",
+        margin: 12,
+        borderWidth: 2,
+        padding: 5
+    },
+    petIcon: {
+        width: 64,
+        height: 64
+    },
+    createContainer: {
+        backgroundColor: "white",
+        flex: 1,
+        alignItems: "center",
+        gap: 10
+    },
+    petSelectionTitle: {
+        fontSize: 18,
+        marginBottom: 10,
+        fontWeight: "bold"
+    },
+    petSelectionContainer: {
+        flexDirection: "row",
+        width: "70%",
+        justifyContent: "space-between",
+    },
+    petPreviewContainer: {
+        borderStyle: "solid",
+        borderWidth: 3,
+        height: "50%",
+        width: "100%",
+
+    },
+    bigTamagochiSprite: {
+        width: 300,
+    },
+})
 
 type pet = {
     iconImg: ImageSourcePropType
@@ -34,8 +82,8 @@ const SelectPet = ({ iconImg, isSelected }: pet) => {
     return (
 
         <Pressable>
-            <View style={tamagochiStyle.petContainer}>
-                <Image style={tamagochiStyle.petIcon} source={iconImg} />
+            <View style={styles.petContainer}>
+                <Image style={styles.petIcon} source={iconImg} />
             </View>
         </Pressable>
     );
@@ -52,18 +100,18 @@ const createTamagochi = () => {
     }
 
     return (
-        <View style={tamagochiStyle.createContainer}>
+        <View style={styles.createContainer}>
             <Header title="Novo Tamagochi" color="green" />
             <TextInput
                 placeholder="Nome do bixinho"
-                style={tamagochiStyle.input}
+                style={styles.input}
                 value={name}
                 onChangeText={setName}
             />
-            <Text style={tamagochiStyle.petSelectionTitle}>
+            <Text style={styles.petSelectionTitle}>
                 Selecione seu bixinho:
             </Text>
-            <View style={tamagochiStyle.petSelectionContainer}>
+            <View style={styles.petSelectionContainer}>
                 <FlatList
                     horizontal={true}
                     data={pets}
@@ -74,8 +122,8 @@ const createTamagochi = () => {
                     }
                 />
             </View>
-            <View style={tamagochiStyle.petPreviewContainer}>
-                <Image style={tamagochiStyle.bigTamagochiSprite} source={require('@/assets/images/reptileSprite.png')} />
+            <View style={styles.petPreviewContainer}>
+                <Image style={styles.bigTamagochiSprite} source={require('@/assets/images/reptileSprite.png')} />
             </View>
             <View>
                 <Button title="Criar Tamagochi" onPress={handleCreateTamagochi} />

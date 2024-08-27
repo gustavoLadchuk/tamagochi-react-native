@@ -1,8 +1,8 @@
 import { StyleSheet, Text, View } from 'react-native';
-import tamagochiStyle from '@/assets/constants/style';
 import Header from '@/components/Header';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import TamagochiSprite from '@/components/TamagochiSprite';
+import Colors from '@/assets/constants/Colors';
 
 type icons =
   | "food-drumstick"
@@ -31,7 +31,20 @@ const styles = StyleSheet.create({
   statusText: {
     fontWeight: "bold",
     fontSize: 18
-  }
+  },
+  roomContainer: {
+    backgroundColor: "black",
+    height: 460
+  },
+  statusContainer: {
+    backgroundColor: Colors.darkYellow,
+    width: "100%",
+    height: 100,
+    justifyContent: "space-around",
+    flexDirection: "row",
+    alignItems: "center",
+    alignSelf: 'center',
+  },
 })
 
 const StatusInfo = ({ icon, color, percentage }: statusIcon) => {
@@ -53,11 +66,11 @@ const StatusInfo = ({ icon, color, percentage }: statusIcon) => {
 export default function Sala() {
   return (
     <View >
-      <Header title='Sala' color='#D4A000' />
-      <View style={tamagochiStyle.roomContainer}>
+      <Header title='Sala' color={Colors.darkYellow} />
+      <View style={styles.roomContainer}>
         <TamagochiSprite TamagochiImage={require('@/assets/images/Hams1.png')} />
       </View>
-      <View style={tamagochiStyle.statusContainer}>
+      <View style={styles.statusContainer}>
         <StatusInfo icon={"food-drumstick"} color={"#753100"} percentage={100} />
         <StatusInfo icon={"moon-waning-crescent"} color={"#002975"} percentage={100} />
         <StatusInfo icon={"gamepad-variant"} color={"#07cc00"} percentage={100} />

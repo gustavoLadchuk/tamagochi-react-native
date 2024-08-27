@@ -5,12 +5,24 @@ import React from "react";
 import { View, Text, Button, StyleSheet } from 'react-native';
 import tamagochiStyle from "@/assets/constants/style";
 
+
+const styles = StyleSheet.create({
+    buttonContainer: {
+        alignItems: "center",
+        marginTop: 5
+    },
+    buttonView: {
+        width: 150,
+        height: 40
+    },
+})
+
 const index = () => {
     return (
         <View>
             <Header title="Seus Tamagochis" color="slateblue" />
-            <View style={tamagochiStyle.buttonContainer}>
-                <View style={tamagochiStyle.buttonView}>
+            <View style={styles.buttonContainer}>
+                <View style={styles.buttonView}>
                     <Link href={"/createTamagochi"}>
                         <Button title="Novo Tamagochi" color={"#6A0D91"} />
                     </Link>

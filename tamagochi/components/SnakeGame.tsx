@@ -1,4 +1,3 @@
-import tamagochiStyle from "@/assets/constants/style";
 import * as React from "react";
 import { PanGestureHandler } from "react-native-gesture-handler";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -11,13 +10,13 @@ import Food from "./SnakeFood";
 import { checkEatsFood } from "./Utils/CheckEatsFood";
 import { randomFoodPosition } from "./Utils/randomFoodPosition";
 
-const SNAKE_INITIAL_POSITION = [{x: 5, y: 5}];
-const FOOD_INITIAL_POSITION = { x:5, y:20};
-const GAME_BOUNDS = {xMin: 0, xMax: 35, yMin: 0,yMax: 78};
+const SNAKE_INITIAL_POSITION = [{ x: 5, y: 5 }];
+const FOOD_INITIAL_POSITION = { x: 5, y: 20 };
+const GAME_BOUNDS = { xMin: 0, xMax: 35, yMin: 0, yMax: 78 };
 const MOVE_INTERVAL = 100;
 const SCORE_INCREMENT = 10;
 
-export default function Game():JSX.Element {
+export default function Game(): JSX.Element {
     const [direction, setDirection] = React.useState<Direction>(Direction.Right);
     const [snake, setSnake] = React.useState<coordinate[]>(
         SNAKE_INITIAL_POSITION
@@ -28,24 +27,24 @@ export default function Game():JSX.Element {
     const [score, setScore] = React.useState<number>(0);
 
     React.useEffect(() => {
-        if(!isGameOver){
+        if (!isGameOver) {
             const intervalid = setInterval(() => {
                 !isPaused && moveSnake();
-             },MOVE_INTERVAL)
-             return () => clearInterval(intervalid);
+            }, MOVE_INTERVAL)
+            return () => clearInterval(intervalid);
         }
-    },[snake,isGameOver,isPaused])
+    }, [snake, isGameOver, isPaused])
     const moveSnake = () => {
         const snakeHead = snake[0];
-        const newHead = {...snakeHead} // creates a new SNAKE HEAD!
+        const newHead = { ...snakeHead } // creates a new SNAKE HEAD!
 
         //game over
-        if(checkGameOver(snakeHead, GAME_BOUNDS)){
+        if (checkGameOver(snakeHead, GAME_BOUNDS)) {
             setIsGameOver((prev => !prev));
             return;
         }
 
-        switch(direction) {
+        switch (direction) {
             case Direction.Up:
                 newHead.y -= 1;
                 break;
@@ -58,34 +57,34 @@ export default function Game():JSX.Element {
             case Direction.Right:
                 newHead.x += 1;
                 break;
-                default:
+            default:
                 break;
         }
-        setSnake([newHead, ...snake.slice(0,-1)]);
-        if(checkEatsFood(newHead,food,2)){
+        setSnake([newHead, ...snake.slice(0, -1)]);
+        if (checkEatsFood(newHead, food, 2)) {
             setSnake([newHead, ...snake]);
             setFood(randomFoodPosition(GAME_BOUNDS.xMax, GAME_BOUNDS.yMax));
             setScore(score + SCORE_INCREMENT);
         }
 
     }
-    
-    const handleGesture = (event: GestureEventType) => {
-        const {translationX, translationY} = event.nativeEvent
 
-        if(Math.abs(translationX) > Math.abs(translationY)) {
-            if(translationX > 0){
+    const handleGesture = (event: GestureEventType) => {
+        const { translationX, translationY } = event.nativeEvent
+
+        if (Math.abs(translationX) > Math.abs(translationY)) {
+            if (translationX > 0) {
                 //moves RIGHT
                 setDirection(Direction.Right);
-            }else{
+            } else {
                 //moves LEFT
                 setDirection(Direction.Left);
             }
-        }else{
-            if(translationY > 0){
+        } else {
+            if (translationY > 0) {
                 //moves DOWN
                 setDirection(Direction.Down);
-            }else{
+            } else {
                 //moves UP
                 setDirection(Direction.Up);
             }
@@ -94,14 +93,14 @@ export default function Game():JSX.Element {
 
 
 
-    return(
+    return (
         <PanGestureHandler onGestureEvent={handleGesture}>
-                <SafeAreaView style={tamagochiStyle.GameContainer}>
-                    <View style={styles.boundaries}>
-                        <Food x={food.x} y={food.y}/>
-                        <Snake snake={snake}/>
-                    </View>
-                </SafeAreaView>
+            <SafeAreaView style={styles.GameContainer}>
+                <View style={styles.boundaries}>
+                    <Food x={food.x} y={food.y} />
+                    <Snake snake={snake} />
+                </View>
+            </SafeAreaView>
         </PanGestureHandler>
     )
 }
@@ -115,7 +114,11 @@ const styles = StyleSheet.create({
         borderBottomLeftRadius: 10,
         borderBottomRightRadius: 10,
         backgroundColor: Colors.primaryYellow,
-    }
+    },
+    GameContainer: {
+        backgroundColor: Colors.primaryYellow,
+        flex: 1,
+    },
 })
 
 
