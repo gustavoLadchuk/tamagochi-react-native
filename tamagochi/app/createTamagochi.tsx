@@ -75,7 +75,7 @@ const createTamagochi = () => {
                 />
             </View>
             <View style={tamagochiStyle.petPreviewContainer}>
-
+                <Image style={tamagochiStyle.bigTamagochiSprite} source={require('@/assets/images/reptileSprite.png')} />
             </View>
             <View>
                 <Button title="Criar Tamagochi" onPress={handleCreateTamagochi} />

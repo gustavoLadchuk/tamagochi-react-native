@@ -3,11 +3,9 @@ import Header from "@/components/Header";
 import { Link } from "expo-router";
 import React from "react";
 import { View, Text, Button, StyleSheet } from 'react-native';
-import { Colors } from "@/constants/Colors";
-import tamagochiStyle from "@/assets/style";
+import tamagochiStyle from "@/assets/constants/style";
 
 const index = () => {
-
     return (
         <View>
             <Header title="Seus Tamagochis" color="slateblue" />
@@ -21,8 +19,7 @@ const index = () => {
                     </Link>
                 </View>
             </View>
-            <CharacterCard />
-            <CharacterCard />
+            <CharacterCard PetImage={require("../assets/images/hamster.png")}Name="Edivaldo" Status={0}/>
         </View>
     );
 }

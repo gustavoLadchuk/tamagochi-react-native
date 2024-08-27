@@ -4,7 +4,7 @@
     "strict": true,
     "paths": {
       "@/*": [
-        "./*"
+        "./*" 
       ]
     }
   },
@@ -13,5 +13,5 @@
     "**/*.tsx",
     ".expo/types/**/*.ts",
     "expo-env.d.ts"
-, "db/databaseInit.js"  ]
+, "db/databaseInit.js", "components/Database/Database.mjs", "app/App.tsx", "components/TaskList.jsx", "components/ExampleComponent.jsx", "components/Tetris.jsx", "components/Cell.jsx", "components/Display.tsx", "components/Stage.jsx", "components/StartButton.jsx"  ]
 }

@@ -22,7 +22,6 @@ const Header = ({ title, color }: headerProps) => {
     return (
         <View style={[style.HeaderContainer, { backgroundColor: color, }]}>
             <Text style={style.HeaderText}>{title}</Text>
-
         </View>
     );
 }
