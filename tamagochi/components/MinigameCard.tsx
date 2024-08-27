@@ -1,6 +1,6 @@
-import tamagochiStyle                from "@/assets/constants/style"
+import tamagochiStyle from "@/assets/constants/style"
 import React from "react"
-import {View,Text,Image,Button, ImageSourcePropType} from 'react-native'
+import { View, Text, Image, Button, ImageSourcePropType } from 'react-native'
 import StatusCalculation from "./StatusCalculation"
 import { Link } from "expo-router"
 
@@ -9,17 +9,19 @@ type prop = {
     Name: string
 }
 
-const MinigameChard = ({Imagemini, Name} : prop) => {
+const MinigameChard = ({ Imagemini, Name }: prop) => {
     return (
-        <View style={tamagochiStyle.cardContainer}>
-            <View>
-               <Image style={tamagochiStyle.MinigameImage} source={Imagemini}/>
-               <Text>{Name}</Text>
-            </View>            
-                <Link href={'/Tetris'}>
-                <Button title="Selecionar"></Button>
-                </Link>
-           </View>
+        <Link href={'/Tetris'}>
+            <View style={tamagochiStyle.cardContainer}>
+                <View>
+                    <Image style={tamagochiStyle.MinigameImage} source={Imagemini} />
+                    <View style={tamagochiStyle.cardTextContainer}>
+                        <Text style={tamagochiStyle.minigameCardText}>{Name}</Text>
+                    </View>
+
+                </View>
+            </View>
+        </Link>
     )
 }
 

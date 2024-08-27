@@ -1,21 +1,19 @@
 import React from "react";
 import { Link } from "expo-router";
-import { Text, View,Image, Button, Pressable} from "react-native";
+import { Text, View, Image, Button, Pressable } from "react-native";
 import tamagochiStyle from "@/assets/constants/style";
 import TamagochiSprite from "@/components/TamagochiSprite";
 import { Href, Redirect } from "expo-router";
 
 
-const tamagochiMain = () => {    
+const tamagochiMain = () => {
 
     return (
-    <View>
-        <TamagochiSprite TamagochiImage={require('@/assets/images/Hams1.png')}/>
-        <Link style={tamagochiStyle.MinigameButton} href={"/Minigames"}>
-            <Button title="Minigames" color={"#6A0D91"} />
-        </Link>
-        
-    </View>
+        <View>
+            <TamagochiSprite TamagochiImage={require('@/assets/images/Hams1.png')} />
+
+
+        </View>
     );
 }
 

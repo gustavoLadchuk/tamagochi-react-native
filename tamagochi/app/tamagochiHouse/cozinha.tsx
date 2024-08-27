@@ -1,5 +1,5 @@
 import { Text, View } from 'react-native';
-import tamagochiStyle from '@/assets/style';
+import tamagochiStyle from '@/assets/constants/style';
 
 
 export default function Cozinha() {

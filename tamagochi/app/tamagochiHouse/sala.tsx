@@ -1,7 +1,8 @@
 import { StyleSheet, Text, View } from 'react-native';
-import tamagochiStyle from '@/assets/style';
+import tamagochiStyle from '@/assets/constants/style';
 import Header from '@/components/Header';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import TamagochiSprite from '@/components/TamagochiSprite';
 
 type icons =
   | "food-drumstick"
@@ -54,7 +55,7 @@ export default function Sala() {
     <View >
       <Header title='Sala' color='#D4A000' />
       <View style={tamagochiStyle.roomContainer}>
-
+        <TamagochiSprite TamagochiImage={require('@/assets/images/Hams1.png')} />
       </View>
       <View style={tamagochiStyle.statusContainer}>
         <StatusInfo icon={"food-drumstick"} color={"#753100"} percentage={100} />

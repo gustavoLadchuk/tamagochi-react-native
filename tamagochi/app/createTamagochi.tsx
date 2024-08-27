@@ -1,6 +1,6 @@
 import Header from "@/components/Header";
 import { Button, StyleSheet, Text, TextInput, View, Image, Pressable, ImageSourcePropType } from "react-native";
-import tamagochiStyle from '../assets/style'
+import tamagochiStyle from '../assets/constants/style'
 import { useState } from "react";
 import { FlatList } from "react-native-gesture-handler";
 
@@ -11,15 +11,15 @@ type pet = {
 
 const petList: pet[] =
     [{
-        iconImg: require(`@/assets/images/hapi.jpg`),
+        iconImg: require(`@/assets/images/hamster.png`),
         isSelected: true
     },
     {
-        iconImg: require(`@/assets/images/sad.jpg`),
+        iconImg: require(`@/assets/images/mouse.png`),
         isSelected: false
     },
     {
-        iconImg: require(`@/assets/images/neutral.jpg`),
+        iconImg: require(`@/assets/images/rabbit.png`),
         isSelected: false
     }]
 

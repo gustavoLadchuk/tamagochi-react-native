@@ -7,34 +7,34 @@ import tamagochiStyle from '@/assets/constants/style';
 
 type CharacterCardProps = {
     PetImage: ImageSourcePropType,
-    Name:string,
-    Status:number,
+    Name: string,
+    Status: number,
 }
 
-const CharacterCard = ({PetImage, Name,Status}: CharacterCardProps) => {
-    
+const CharacterCard = ({ PetImage, Name, Status }: CharacterCardProps) => {
+
     return (
         <View style={tamagochiStyle.cardContainer}>
             <View style={tamagochiStyle.CardImage}>
-               <Image source={PetImage}/>
+                <Image source={PetImage} />
             </View>
-           
-        <View style={tamagochiStyle.CardText}>
-           <Text>
-                {Name}
-            </Text>
-              
-            <Text>
-                Atributes
-            </Text>
 
-            <Text>
-                Status:  <StatusCalculation status={Status}/>
-            </Text>
-                <Link href={'/tamagochiMain'}>
-                <Button title="Selecionar"></Button>
+            <View style={tamagochiStyle.CardText}>
+                <Text>
+                    {Name}
+                </Text>
+
+                <Text>
+                    Atributes
+                </Text>
+
+                <Text>
+                    Status:  <StatusCalculation status={Status} />
+                </Text>
+                <Link href={"/tamagochiHouse/sala"}>
+                    <Button title="Selecionar"></Button>
                 </Link>
-           </View>
+            </View>
         </View>
     );
 

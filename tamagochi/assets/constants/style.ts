@@ -84,7 +84,7 @@ const tamagochiStyle = StyleSheet.create({
         height: 100,
         justifyContent: "space-around",
         flexDirection: "row",
-        alignItems: "center"
+        alignItems: "center",
         alignSelf: 'center',
     },
     MinigameButton: {
@@ -94,11 +94,23 @@ const tamagochiStyle = StyleSheet.create({
     cardContainer: {
         marginTop: 50,
         backgroundColor: Colors.lavenderPurple,
-        width: 160,
-        height: 300,
+        width: 180,
+        height: 200,
         alignItems: 'center',
         gap: 50,
         borderWidth: 3,
+        padding: 10,
+        borderRadius: 10
+    },
+    cardTextContainer: {
+        alignItems: "center",
+        height: 50,
+        justifyContent: "center",
+    },
+    minigameCardText: {
+        fontSize: 20,
+        fontWeight: "bold",
+
     },
     CharacterText: {
         fontFamily: "Verdana",
@@ -127,7 +139,10 @@ const tamagochiStyle = StyleSheet.create({
     minigamePage: {
         flex: 1,
         backgroundColor: Colors.royalPurple,
-        flexDirection: 'row'
+        flexDirection: 'row',
+        flexWrap: "wrap",
+        justifyContent: "center",
+        gap: 5
     }
 })
 
