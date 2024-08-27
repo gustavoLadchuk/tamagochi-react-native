@@ -31,6 +31,7 @@ export default function RootLayout() {
       <Stack>
         <Stack.Screen name="index" options={{ headerShown: false }} />
         <Stack.Screen name="createTamagochi" options={{ headerShown: false }} />
+        <Stack.Screen name="tamagochiHouse" options={{ headerShown: false }} />
       </Stack>
     </SafeAreaView>
   );

@@ -16,6 +16,9 @@ const index = () => {
                     <Link href={"/createTamagochi"}>
                         <Button title="Novo Tamagochi" color={"#6A0D91"} />
                     </Link>
+                    <Link href={"/tamagochiHouse/sala"}>
+                        <Button title="Home" color={"#6A0D91"} />
+                    </Link>
                 </View>
             </View>
             <CharacterCard />

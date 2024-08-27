@@ -1,6 +1,7 @@
 import { StyleSheet } from 'react-native'
 import ColorsStyle from "./constants"
 import tamagochiMain from '@/app/tamagochiMain'
+
 const tamagochiStyle = StyleSheet.create({
     createContainer: {
         backgroundColor: "white",
@@ -54,10 +55,35 @@ const tamagochiStyle = StyleSheet.create({
         marginTop: 10,
     },
     tamagochiStats: {
-       
+
     },
     tamagochiSprite: {
-        
+
+    },
+    roomContainer: {
+        backgroundColor: "black",
+        height: 460
+    },
+    petContainer: {
+        width: 70,
+        height: 70,
+        borderStyle: "solid",
+        borderWidth: 3,
+        alignItems: "center",
+        justifyContent: "center",
+        marginHorizontal: 7
+    },
+    petIcon: {
+        width: 64,
+        height: 64
+    },
+    statusContainer: {
+        backgroundColor: "#B89B45",
+        width: "100%",
+        height: 100,
+        justifyContent: "space-around",
+        flexDirection: "row",
+        alignItems: "center"
     }
 })
 
