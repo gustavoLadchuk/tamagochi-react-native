@@ -7,7 +7,6 @@ import 'react-native-reanimated';
 import { useColorScheme } from '@/hooks/useColorScheme';
 import { SafeAreaView } from 'react-native';
 
-// Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
@@ -31,7 +30,11 @@ export default function RootLayout() {
       <Stack>
         <Stack.Screen name="index" options={{ headerShown: false }} />
         <Stack.Screen name="createTamagochi" options={{ headerShown: false }} />
-      </Stack>
+        <Stack.Screen name="tamagochiMain" options={{headerShown: false}}/>
+        <Stack.Screen name="Minigames" options={{headerShown: false}}/>
+        <Stack.Screen name="TetrisMinigame" options={{headerShown: false}}/>
+        <Stack.Screen name='Tetris' options={{headerShown: false}}/>
+        <Stack.Screen name='Snake' options={{headerShown: false}}/>      </Stack>
     </SafeAreaView>
   );
 }

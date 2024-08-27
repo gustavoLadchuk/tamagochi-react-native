@@ -1,17 +1,17 @@
 import React from "react";
 import { Text } from "react-native";
-type props = {
-    fome: number,
-    diversao: number,
-    sono: number
+
+type prop = {
+    status:number
 }
 
-const StatusCalculation: React.FC<props> = ({fome,diversao,sono}: props) => {
+const StatusCalculation = ({status}: prop) => {
 
 
-    let status:number = fome + diversao + sono;
     let message = ""
-    if(status >= 1 && status <= 50){
+    if(status < 1){
+        message = "Morto"
+    }if(status >= 1 && status <= 50){
         message = "Critíco"
     }if(status >= 51 && status <= 100){
         message = "Muito Triste"
@@ -24,7 +24,6 @@ const StatusCalculation: React.FC<props> = ({fome,diversao,sono}: props) => {
     }if(status >= 252 && status <= 300){
         message = "Muito Bem"
     }
-
     return (
         <Text>
             {message}

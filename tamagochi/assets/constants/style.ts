@@ -1,6 +1,9 @@
 import { StyleSheet } from 'react-native'
-import ColorsStyle from "./constants"
+import Colors from './Colors'
 import tamagochiMain from '@/app/tamagochiMain'
+import { Block, EmptyCell } from '@/components/TetrisTypes'
+import Cell from '@/components/TetrisCell'
+
 const tamagochiStyle = StyleSheet.create({
     createContainer: {
         backgroundColor: "white",
@@ -47,17 +50,58 @@ const tamagochiStyle = StyleSheet.create({
     tamagochiContainer: {
         height: 400,
         width: 250,
-        backgroundColor: ColorsStyle.lavenderPurple,
+        backgroundColor: Colors.lavenderPurple,
         justifyContent: "center",
         alignItems: "center",
-        alignSelf: "center",
         marginTop: 10,
     },
     tamagochiStats: {
        
     },
     tamagochiSprite: {
-        
+        alignSelf: 'center',
+    },
+    MinigameButton: {
+        marginTop: 20,
+        alignSelf: 'center',
+    },
+    cardContainer: {
+        marginTop: 50,
+        backgroundColor: Colors.lavenderPurple,
+        width: 160,
+        height: 300,
+        alignItems: 'center',
+        gap: 50,
+        borderWidth: 3,
+    },
+    CharacterText: {
+        fontFamily: "Verdana",
+        fontWeight: "bold",
+    },
+    CardText: {
+        gap: 10
+    },
+    CardImage: {
+        marginLeft: 20,
+    },
+    MinigameImage: {
+        borderWidth: 4,
+        borderColor: 'white',
+        marginLeft: 10,
+        width: 120,
+        height: 120,
+    },
+    bigTamagochiSprite: {
+        width: 300,
+    },
+    GameContainer: {
+        backgroundColor: Colors.primaryYellow,
+        flex: 1,
+    },
+    minigamePage: {
+        flex: 1,
+        backgroundColor: Colors.royalPurple,
+        flexDirection: 'row'
     }
 })
 

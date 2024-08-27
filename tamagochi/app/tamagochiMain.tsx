@@ -1,29 +1,21 @@
 import React from "react";
-import { Text, View } from "react-native";
-import tamagochiStyle from "@/assets/style";
-import StatusCalculation from "@/components/StatusCalculation";
+import { Link } from "expo-router";
+import { Text, View,Image, Button, Pressable} from "react-native";
+import tamagochiStyle from "@/assets/constants/style";
+import TamagochiSprite from "@/components/TamagochiSprite";
+import { Href, Redirect } from "expo-router";
+
+
 const tamagochiMain = () => {    
-    let fome:number = 10, 
-    diversao:number = 10, 
-    sono:number = 10
 
     return (
-        <View style={tamagochiStyle.tamagochiMainContainer}>
-            <Text>
-                Status: 
-                <Text>
-                    <StatusCalculation fome={fome} sono={sono} diversao={diversao}/>
-                </Text> 
-            </Text>
-            <View style={tamagochiStyle.tamagochiContainer}>
-                <View style={tamagochiStyle.tamagochiStats}>
-                    sono: 
-                </View>
-                <View style={tamagochiStyle.tamagochiSprite}>
-                    tamagochi :3
-                </View>
-            </View>
-        </View>
+    <View>
+        <TamagochiSprite TamagochiImage={require('@/assets/images/Hams1.png')}/>
+        <Link style={tamagochiStyle.MinigameButton} href={"/Minigames"}>
+            <Button title="Minigames" color={"#6A0D91"} />
+        </Link>
+        
+    </View>
     );
 }
 

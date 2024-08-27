@@ -1,4 +1,4 @@
-import { Image, StyleSheet, View } from "react-native";
+import { Image, ImageSourcePropType, StyleSheet, View } from "react-native";
 
 const styles = StyleSheet.create({
     petContainer: {
@@ -16,14 +16,14 @@ const styles = StyleSheet.create({
 })
 
 type pet = {
-    image_id: number
+    petImage: ImageSourcePropType
 }
 
-const SelectPet = () => {
+const SelectPet = ({petImage}: pet) => {
 
     return (
         <View style={styles.petContainer}>
-            <Image style={styles.petIcon} source={require("@/assets/images/hapi.jpg")} />
+            <Image style={styles.petIcon} source={petImage} />
         </View>
     );
 }
