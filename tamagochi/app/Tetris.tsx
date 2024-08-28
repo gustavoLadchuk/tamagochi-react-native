@@ -1,6 +1,5 @@
 import React from "react";
-import { View,Text } from "react-native";
-import tamagochiStyle from "@/assets/constants/style";
+import { View, Text } from "react-native";
 
 const Tetris = () => {
     return (

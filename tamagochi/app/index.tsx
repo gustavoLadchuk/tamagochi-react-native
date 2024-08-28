@@ -3,7 +3,6 @@ import Header from "@/components/Header";
 import { Link } from "expo-router";
 import React from "react";
 import { View, Text, Button, StyleSheet } from 'react-native';
-import tamagochiStyle from "@/assets/constants/style";
 
 
 const styles = StyleSheet.create({
