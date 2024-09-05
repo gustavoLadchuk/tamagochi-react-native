@@ -4,12 +4,9 @@ import { Button, Image, ImageSourcePropType, Linking, StyleSheet, Text, View } f
 import StatusCalculation from "./StatusCalculation";
 import { Link, Redirect } from "expo-router";
 import Colors from '@/assets/constants/Colors';
+import { tamagochi } from './Types/types';
+import { calculate } from './constants/statusCalculate';
 
-type CharacterCardProps = {
-    PetImage: ImageSourcePropType,
-    Name: string,
-    Status: number,
-}
 
 const styles = StyleSheet.create({
     cardContainer: {
@@ -31,31 +28,43 @@ const styles = StyleSheet.create({
     },
 })
 
-const CharacterCard = ({ PetImage, Name, Status }: CharacterCardProps) => {
+
+const CharacterCard = ({ name, pet_id, hunger, sleep, fun, is_sleeping }: tamagochi) => {
+
+    const status = calculate(hunger + sleep + fun)
 
     return (
-        <View style={styles.cardContainer}>
-            <View style={styles.CardImage}>
-                <Image source={PetImage} />
+        <Link href={hunger + sleep + fun > 0 ? "/tamagochiHouse/sala" : "/deleteTamagochi"}>
+            <View style={styles.cardContainer}>
+                <View style={styles.CardImage}>
+                    <Image source={require("../assets/images/hamster.png")} />
+                </View>
+
+                <View style={styles.CardText}>
+                    <Text>
+                        {name}
+                    </Text>
+
+                    <View>
+                        <Text>
+                            Fome: {hunger}%
+                        </Text>
+                        <Text>
+                            Sono: {sleep}%
+                        </Text>
+                        <Text>
+                            Diversão: {fun}%
+                        </Text>
+                    </View>
+
+
+                    <Text>
+                        Status:  {status}
+                    </Text>
+
+                </View>
             </View>
-
-            <View style={styles.CardText}>
-                <Text>
-                    {Name}
-                </Text>
-
-                <Text>
-                    Atributes
-                </Text>
-
-                <Text>
-                    Status:  <StatusCalculation status={Status} />
-                </Text>
-                <Link href={"/tamagochiHouse/sala"}>
-                    <Button title="Selecionar"></Button>
-                </Link>
-            </View>
-        </View>
+        </Link>
     );
 
 

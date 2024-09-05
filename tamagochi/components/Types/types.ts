@@ -1,5 +1,5 @@
 export interface GestureEventType {
-    nativeEvent: {translationX: number, translationY: number};
+    nativeEvent: { translationX: number, translationY: number };
 }
 
 export interface coordinate {
@@ -7,9 +7,20 @@ export interface coordinate {
     y: number,
 }
 
-export enum Direction{
+export enum Direction {
     Right,
     Left,
     Up,
     Down,
 }
+
+export type tamagochi = {
+    name: string,
+    pet_id: number,
+    hunger: number,
+    sleep: number,
+    fun: number,
+    is_sleeping: boolean
+}
+
+

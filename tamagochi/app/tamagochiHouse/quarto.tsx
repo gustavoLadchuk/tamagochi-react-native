@@ -1,44 +1,90 @@
 import Colors from '@/assets/constants/Colors';
 import Header from '@/components/Header';
+import InteractionButton from '@/components/InteractionButton';
+import PetInfo from '@/components/PetInfo';
+import StatusHeader from '@/components/StatusHeader';
 import StatusInfo from '@/components/StatusInfo';
 import TamagochiSprite from '@/components/TamagochiSprite';
-import { ImageBackground, StyleSheet, Text, View } from 'react-native';
+import { useEffect, useState } from 'react';
+import { Button, ImageBackground, StyleSheet, Text, View } from 'react-native';
 
 const styles = StyleSheet.create({
-  kitchenContainer: {
+  roomContainer: {
     height: 460
-  },
-  statusContainer: {
-    backgroundColor: Colors.darkYellow,
-    width: "100%",
-    height: 100,
-    justifyContent: "space-around",
-    flexDirection: "row",
-    alignItems: "center",
-    alignSelf: 'center',
   },
   tamagochiContainer: {
     position: "absolute",
     right: 10,
-    bottom: -50
-  }
+    top: 90
+  },
+  lightOff: {
+    position: "absolute",
+    width: "100%",
+    height: 500,
+  },
+  interactionContainer: {
+    width: "100%",
+    height: 80,
+    backgroundColor: Colors.darkYellow,
+    justifyContent: 'center',
+    alignItems: "center"
+  },
+
 })
 
+type tamagochiAtributes = {
+  hunger: number,
+  sleep: number,
+  fun: number
+}
+
 export default function Quarto() {
+
+  const now = new Date()
+
+  const [atributes, setAtributes] = useState<tamagochiAtributes>({
+    hunger: 50,
+    sleep: 50,
+    fun: 50
+  })
+
+  const [lastUpdate, setLastUpdate] = useState<number>()
+
+  const updateAtributes = async () => {
+    setLastUpdate(10)
+    console.log(lastUpdate)
+  }
+
+  useEffect(() => {
+    updateAtributes()
+  }, [])
+
+  const [sleeping, setSleeping] = useState(false)
+
+  const handleSleepButton = () => {
+    if (sleeping) {
+      setSleeping(false)
+      return
+    }
+    setSleeping(true)
+
+  }
+
   return (
     <View >
-      <Header title='Quarto' color={Colors.darkYellow} />
-      <View style={styles.kitchenContainer}>
+      <StatusHeader hunger={atributes.hunger} sleep={atributes.sleep} fun={atributes.fun} />
+      <View style={styles.roomContainer}>
         <ImageBackground source={require('@/assets/images/quarto.jpg')}>
-
+          <PetInfo name='Edivaldo' status='feliz' />
+          <View style={styles.tamagochiContainer}>
+            <TamagochiSprite TamagochiImage={require('@/assets/images/coelho.png')} />
+          </View>
+          <View style={[styles.lightOff, { backgroundColor: `rgba(0, 0, 0, ${sleeping ? 0.7 : 0})` }]} />
         </ImageBackground>
-        <View style={styles.tamagochiContainer}>
-          <TamagochiSprite TamagochiImage={require('@/assets/images/coelho.png')} />
-        </View>
-
       </View >
-      <View style={styles.statusContainer}>
-        <StatusInfo icon={"moon-waning-crescent"} color={"#002975"} percentage={100} />
+
+      <View style={styles.interactionContainer}>
+        <InteractionButton title={sleeping ? "Acordar" : "Dormir"} color='#002975' onPress={handleSleepButton} />
       </View>
     </View>
   );

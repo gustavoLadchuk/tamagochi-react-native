@@ -4,6 +4,11 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import TamagochiSprite from '@/components/TamagochiSprite';
 import Colors from '@/assets/constants/Colors';
 import StatusInfo from '@/components/StatusInfo';
+import { useEffect, useState } from 'react';
+import InteractionButton from '@/components/InteractionButton';
+import { Link } from 'expo-router';
+import StatusHeader from '@/components/StatusHeader';
+import PetInfo from '@/components/PetInfo';
 
 
 
@@ -30,7 +35,7 @@ const styles = StyleSheet.create({
   statusContainer: {
     backgroundColor: Colors.darkYellow,
     width: "100%",
-    height: 100,
+    height: 80,
     justifyContent: "space-around",
     flexDirection: "row",
     alignItems: "center",
@@ -40,29 +45,74 @@ const styles = StyleSheet.create({
     position: "absolute",
     right: 10,
     top: 20
+  },
+  interactionContainer: {
+    width: "100%",
+    height: 80,
+    backgroundColor: Colors.darkYellow,
+    justifyContent: 'center',
+    alignItems: "center"
+  },
+  petInfoContainer: {
+    width: "100%",
+    alignItems: "center"
+  },
+  petName: {
+    fontSize: 30,
+    color: "white",
+    fontWeight: "bold"
+  },
+  petStatus: {
+    color: "white",
+    fontSize: 20
   }
-
 })
 
 
-
+type tamagochiAtributes = {
+  hunger: number,
+  sleep: number,
+  fun: number
+}
 
 export default function Sala() {
+
+  const [atributes, setAtributes] = useState<tamagochiAtributes>({
+    hunger: 50,
+    sleep: 50,
+    fun: 50
+  })
+
+  const [lastUpdate, setLastUpdate] = useState<number>()
+
+  const updateAtributes = () => {
+    setLastUpdate(Date.now)
+  }
+
+  useEffect(() => {
+    updateAtributes()
+  }, [])
+
   return (
     <View >
-      <Header title='Sala' color={Colors.darkYellow} />
+      <StatusHeader hunger={atributes.hunger} sleep={atributes.sleep} fun={atributes.fun} />
+
       <View style={styles.roomContainer}>
         <ImageBackground source={require('@/assets/images/sala.jpg')}>
+          <PetInfo name='Edivaldo' status='feliz' />
           <View style={styles.tamagochiContainer}>
             <TamagochiSprite TamagochiImage={require('@/assets/images/rato.png')} />
           </View>
         </ImageBackground>
       </View>
-      <View style={styles.statusContainer}>
-        <StatusInfo icon={"food-drumstick"} color={"#753100"} percentage={100} />
-        <StatusInfo icon={"moon-waning-crescent"} color={"#002975"} percentage={100} />
-        <StatusInfo icon={"gamepad-variant"} color={"#07cc00"} percentage={100} />
+      <View style={styles.interactionContainer}>
+        <Link href={"/jogos"}>
+          <InteractionButton title={"Brincar"} color='#07cc00' onPress={() => { }} />
+        </Link>
+
+
       </View>
+
     </View>
   );
 }

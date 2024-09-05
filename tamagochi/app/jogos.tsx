@@ -35,9 +35,11 @@ const Jogos = () => {
       <Header title='Jogos' color={Colors.darkYellow} />
       <View style={styles.gamesContainer}>
         <MinigameChard Imagemini={require('@/assets/images/images.png')}
-          Name="Tetris" />
+          Name="Tetris" Path="/Tetris" />
         <MinigameChard Imagemini={require('@/assets/images/snake.jpeg')}
-          Name="Snake" />
+          Name="Snake" Path="/Snake" />
+        <MinigameChard Imagemini={require('@/assets/images/snake.jpeg')}
+          Name="Car Street" Path="/carStreet" />
       </View>
 
 

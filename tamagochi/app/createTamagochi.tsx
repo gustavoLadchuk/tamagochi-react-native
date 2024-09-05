@@ -1,7 +1,8 @@
 import Header from "@/components/Header";
-import { Button, StyleSheet, Text, TextInput, View, Image, Pressable, ImageSourcePropType } from "react-native";
+import { Button, StyleSheet, Text, TextInput, View, Image, Pressable, ImageSourcePropType, ImageBackground } from "react-native";
 import { useState } from "react";
 import { FlatList } from "react-native-gesture-handler";
+import TamagochiSprite from "@/components/TamagochiSprite";
 
 const styles = StyleSheet.create({
     petContainer: {
@@ -45,44 +46,62 @@ const styles = StyleSheet.create({
         borderWidth: 3,
         height: "50%",
         width: "100%",
-
+        overflow: "hidden"
+    },
+    petPreviewBackground: {
+        width: "100%",
+        height: "100%"
     },
     bigTamagochiSprite: {
         width: 300,
+        height: 300,
+        position: "absolute",
+        top: -30,
+        left: 12
     },
+    tamagochiContainer: {
+        position: "absolute",
+        left: 50,
+        bottom: 0
+    }
 })
 
 type pet = {
     iconImg: ImageSourcePropType
-    isSelected: boolean
+    sprite: ImageSourcePropType
 }
 
 const petList: pet[] =
     [{
-        iconImg: require(`@/assets/images/hamster.png`),
-        isSelected: true
+        iconImg: require(`@/assets/images/rabbit.png`),
+        sprite: require('@/assets/images/coelho.png'),
     },
     {
         iconImg: require(`@/assets/images/mouse.png`),
-        isSelected: false
+        sprite: require('@/assets/images/rato.png'),
     },
     {
-        iconImg: require(`@/assets/images/rabbit.png`),
-        isSelected: false
+        iconImg: require(`@/assets/images/reptile.png`),
+        sprite: require('@/assets/images/cobra.png'),
     }]
 
 
 
-const SelectPet = ({ iconImg, isSelected }: pet) => {
+const SelectPet = ({ index, iconImg, isSelected, onPress }: {
+    index: number,
+    iconImg: ImageSourcePropType,
+    isSelected: boolean,
+    onPress: (index: number) => void
+}) => {
 
     const handleSelectPet = () => {
-
+        onPress(index)
     }
 
     return (
 
-        <Pressable>
-            <View style={styles.petContainer}>
+        <Pressable onPress={handleSelectPet}>
+            <View style={[styles.petContainer, { borderColor: isSelected ? "lightgreen" : "black" }]}>
                 <Image style={styles.petIcon} source={iconImg} />
             </View>
         </Pressable>
@@ -93,10 +112,15 @@ const createTamagochi = () => {
 
     const [name, setName] = useState("")
 
-    const [pets, setPets] = useState<pet[]>(petList)
+    const [selectedPet, setSelectedPet] = useState(0)
+
+    const handleSelectTamagochi = (index: number) => {
+        setSelectedPet(index)
+    }
 
     const handleCreateTamagochi = () => {
         console.log(name)
+        console.log(selectedPet)
     }
 
     return (
@@ -112,21 +136,29 @@ const createTamagochi = () => {
                 Selecione seu bixinho:
             </Text>
             <View style={styles.petSelectionContainer}>
-                <FlatList
-                    horizontal={true}
-                    data={pets}
-                    extraData={pets}
-                    keyExtractor={(item, index) => String(index)}
-                    renderItem={({ item, index }) =>
-                        <SelectPet iconImg={item.iconImg} isSelected={item.isSelected} />
-                    }
-                />
+
+                {petList.map((item, index) => {
+                    return (
+                        <SelectPet
+                            index={index}
+                            iconImg={item.iconImg}
+                            isSelected={selectedPet == index}
+                            onPress={handleSelectTamagochi}
+                            key={index}
+                        />
+                    )
+                })}
             </View>
             <View style={styles.petPreviewContainer}>
-                <Image style={styles.bigTamagochiSprite} source={require('@/assets/images/reptileSprite.png')} />
+                <ImageBackground source={require('@/assets/images/sala.jpg')} style={styles.petPreviewBackground} resizeMode="cover">
+                    <View style={styles.tamagochiContainer}>
+                        <TamagochiSprite TamagochiImage={petList[selectedPet].sprite} />
+                    </View>
+                </ImageBackground>
+
             </View>
             <View>
-                <Button title="Criar Tamagochi" onPress={handleCreateTamagochi} />
+                <Button title="Criar Tamagochi" onPress={handleCreateTamagochi} disabled={!name} />
             </View>
         </View>
     );

@@ -9,7 +9,8 @@ const styles = StyleSheet.create({
         borderWidth: 3,
         borderRadius: 5,
         alignItems: "center",
-        justifyContent: "center"
+        justifyContent: "center",
+        borderColor: "white"
     },
     statContainer: {
         flexDirection: "row",
@@ -41,7 +42,7 @@ const StatusInfo = ({ icon, color, percentage }: statusIcon) => {
                 <MaterialCommunityIcons
                     name={icon}
                     size={40}
-                    color="black"
+                    color="white"
                 />
             </View>
             <Text style={styles.statusText}>{percentage}%</Text>

@@ -39,11 +39,12 @@ const styles = StyleSheet.create({
 type prop = {
     Imagemini: ImageSourcePropType,
     Name: string
+    Path: string
 }
 
-const MinigameChard = ({ Imagemini, Name }: prop) => {
+const MinigameChard = ({ Imagemini, Name, Path }: prop) => {
     return (
-        <Link href={'/Tetris'}>
+        <Link href={Path}>
             <View style={styles.cardContainer}>
                 <View>
                     <Image style={styles.MinigameImage} source={Imagemini} />
