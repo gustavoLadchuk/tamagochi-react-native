@@ -3,7 +3,8 @@ import { View, Text, Image, ImageSourcePropType, StyleSheet } from 'react-native
 
 
 type props = {
-    TamagochiImage: ImageSourcePropType
+    TamagochiImage: ImageSourcePropType,
+    scale: number
 }
 
 const styles = StyleSheet.create({
@@ -15,16 +16,15 @@ const styles = StyleSheet.create({
         marginTop: 10,
     },
     tamagochiSprite: {
-        height: 250,
-        width: 250
+
     }
 })
 
-const TamagochiSprite = ({ TamagochiImage }: props) => {
+const TamagochiSprite = ({ TamagochiImage, scale }: props) => {
 
     return (
         <View style={styles.tamagochiMainContainer}>
-            <Image source={TamagochiImage} style={styles.tamagochiSprite} />
+            <Image source={TamagochiImage} style={{ height: 50 * scale, width: 50 * scale }} />
         </View>
     );
 }

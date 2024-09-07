@@ -5,8 +5,7 @@ import { useEffect } from 'react';
 import 'react-native-reanimated';
 
 import { useColorScheme } from '@/hooks/useColorScheme';
-import { SafeAreaView } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -32,11 +31,12 @@ export default function RootLayout() {
         <Stack.Screen name="index" options={{ headerShown: false }} />
         <Stack.Screen name="createTamagochi" options={{ headerShown: false }} />
         <Stack.Screen name="deleteTamagochi" options={{ headerShown: false }} />
-        <Stack.Screen name="tamagochiHouse" options={{ headerShown: false }} />
+        <Stack.Screen name="tamagochiDetails" options={{ headerShown: false }} />
         <Stack.Screen name="jogos" options={{ headerShown: false }} />
         <Stack.Screen name="Snake" options={{ headerShown: false }} />
         <Stack.Screen name="carStreet" options={{ headerShown: false }} />
       </Stack>
     </SafeAreaView>
+
   );
 }

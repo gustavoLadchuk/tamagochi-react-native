@@ -1,16 +1,18 @@
+import Colors from "@/assets/constants/Colors";
 import CharacterCard from "@/components/CharacterCard";
 import Header from "@/components/Header";
 import { tamagochi } from "@/components/Types/types";
 import { Link } from "expo-router";
 import React, { useEffect, useState } from "react";
-import { View, Text, Button, StyleSheet } from 'react-native';
-import { FlatList } from "react-native-gesture-handler";
+import { View, Text, Button, StyleSheet, Pressable } from 'react-native';
+import { FlatList } from "react-native";
 
 
 const styles = StyleSheet.create({
     pageView: {
         flex: 1,
-        alignItems: "center"
+        alignItems: "center",
+        gap: 10
     },
     buttonContainer: {
         alignItems: "center",
@@ -18,8 +20,17 @@ const styles = StyleSheet.create({
     },
     buttonView: {
         width: 150,
-        height: 40
+        height: 40,
+        backgroundColor: Colors.softGreen,
+        alignItems: "center",
+        justifyContent: "center",
+        borderRadius: 10
     },
+    listContainer: {
+        width: "100%",
+        gap: 10,
+        alignItems: "center"
+    }
 })
 
 const index = () => {
@@ -65,12 +76,15 @@ const index = () => {
         <View style={styles.pageView}>
             <Header title="Seus Tamagochis" color="slateblue" />
             <View style={styles.buttonContainer}>
-                <View style={styles.buttonView}>
-                    <Link href={"/createTamagochi"}>
-                        <Button title="Novo Tamagochi" color={"#6A0D91"} />
-                    </Link>
-                </View>
+
+                <Link href={"/createTamagochi"}>
+                    <View style={styles.buttonView}>
+                        <Text>Novo Tamagochi</Text>
+                    </View>
+                </Link>
+
             </View>
+
 
             <FlatList
                 data={petList}
@@ -89,7 +103,14 @@ const index = () => {
                     )
 
                 }}
+                ItemSeparatorComponent={() => {
+                    return (
+                        <View style={{ height: 10 }} />
+                    )
+                }}
             />
+
+
         </View>
     );
 }

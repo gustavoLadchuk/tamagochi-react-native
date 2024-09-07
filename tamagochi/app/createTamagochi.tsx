@@ -1,7 +1,6 @@
 import Header from "@/components/Header";
 import { Button, StyleSheet, Text, TextInput, View, Image, Pressable, ImageSourcePropType, ImageBackground } from "react-native";
 import { useState } from "react";
-import { FlatList } from "react-native-gesture-handler";
 import TamagochiSprite from "@/components/TamagochiSprite";
 
 const styles = StyleSheet.create({
@@ -152,7 +151,7 @@ const createTamagochi = () => {
             <View style={styles.petPreviewContainer}>
                 <ImageBackground source={require('@/assets/images/sala.jpg')} style={styles.petPreviewBackground} resizeMode="cover">
                     <View style={styles.tamagochiContainer}>
-                        <TamagochiSprite TamagochiImage={petList[selectedPet].sprite} />
+                        <TamagochiSprite scale={5} TamagochiImage={petList[selectedPet].sprite} />
                     </View>
                 </ImageBackground>
 

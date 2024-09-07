@@ -34,7 +34,7 @@ const CharacterCard = ({ name, pet_id, hunger, sleep, fun, is_sleeping }: tamago
     const status = calculate(hunger + sleep + fun)
 
     return (
-        <Link href={hunger + sleep + fun > 0 ? "/tamagochiHouse/sala" : "/deleteTamagochi"}>
+        <Link href={hunger + sleep + fun > 0 ? "/tamagochiDetails" : "/deleteTamagochi"}>
             <View style={styles.cardContainer}>
                 <View style={styles.CardImage}>
                     <Image source={require("../assets/images/hamster.png")} />

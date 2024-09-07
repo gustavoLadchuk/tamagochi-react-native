@@ -87,7 +87,7 @@ export default function Cozinha() {
         <ImageBackground source={require('@/assets/images/cozinha.jpg')}>
           <PetInfo name='Edivaldo' status='feliz' />
           <View style={styles.tamagochiContainer}>
-            <TamagochiSprite TamagochiImage={require('@/assets/images/cobra.png')} />
+            <TamagochiSprite TamagochiImage={require('@/assets/images/coelho.png')} />
           </View>
         </ImageBackground>
       </View>

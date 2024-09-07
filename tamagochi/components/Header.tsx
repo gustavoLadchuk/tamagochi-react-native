@@ -13,7 +13,6 @@ const style = StyleSheet.create({
         alignItems: "center",
     },
     HeaderText: {
-        fontFamily: "Verdana",
         fontWeight: "bold",
         color: "white"
     },

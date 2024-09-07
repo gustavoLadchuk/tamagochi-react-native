@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
   }
 })
 
-const Jogos = () => {
+const jogos = () => {
   return (
     <View style={styles.minigamePage}>
       <Header title='Jogos' color={Colors.darkYellow} />
@@ -48,4 +48,4 @@ const Jogos = () => {
 }
 
 
-export default Jogos
+export default jogos

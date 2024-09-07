@@ -101,13 +101,16 @@ export default function Sala() {
         <ImageBackground source={require('@/assets/images/sala.jpg')}>
           <PetInfo name='Edivaldo' status='feliz' />
           <View style={styles.tamagochiContainer}>
-            <TamagochiSprite TamagochiImage={require('@/assets/images/rato.png')} />
+            {/* <TamagochiSprite TamagochiImage={require('@/assets/images/coelho.png')} /> */}
           </View>
         </ImageBackground>
       </View>
       <View style={styles.interactionContainer}>
+
         <Link href={"/jogos"}>
-          <InteractionButton title={"Brincar"} color='#07cc00' onPress={() => { }} />
+          <View>
+            <InteractionButton title={"Brincar"} color='#07cc00' onPress={() => { }} />
+          </View>
         </Link>
 
 
