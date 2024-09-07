@@ -165,6 +165,8 @@ export default function tamagochiDetails() {
 
     const [lastUpdate, setLastUpdate] = useState<number>()
 
+    const [sleeping, setSleeping] = useState(false)
+
     const updateAtributes = () => {
         setLastUpdate(Date.now)
     }
@@ -184,6 +186,24 @@ export default function tamagochiDetails() {
 
     }
 
+    const handleFeedButton = () => {
+        if (atributes.hunger < 100) {
+            setAtributes({ hunger: atributes.hunger + 10, sleep: atributes.sleep, fun: atributes.fun })
+        }
+
+    }
+
+
+
+    const handleSleepButton = () => {
+        if (sleeping) {
+            setSleeping(false)
+            return
+        }
+        setSleeping(true)
+
+    }
+
     return (
         <View >
             <StatusHeader hunger={atributes.hunger} sleep={atributes.sleep} fun={atributes.fun} />
@@ -194,11 +214,7 @@ export default function tamagochiDetails() {
 
                 <ChangeButton isLeftDirection={true} func={changeRoom} />
 
-                <Link href={"/jogos"}>
-                    <View style={styles.playButton}>
-                        <Text style={styles.playButtonText}>Brincar</Text>
-                    </View>
-                </Link>
+                <InteractionButton room={room} eatFunc={handleFeedButton} sleepFunc={handleSleepButton} />
 
                 <ChangeButton isLeftDirection={false} func={changeRoom} />
 
