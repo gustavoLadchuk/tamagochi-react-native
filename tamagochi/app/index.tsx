@@ -2,7 +2,8 @@ import Colors from "@/assets/constants/Colors";
 import CharacterCard from "@/components/CharacterCard";
 import Header from "@/components/Header";
 import { tamagochi } from "@/components/Types/types";
-import { Link } from "expo-router";
+import { useDatabase } from "@/hooks/useDatabase";
+import { Link, useFocusEffect } from "expo-router";
 import React, { useEffect, useState } from "react";
 import { View, Text, Button, StyleSheet, Pressable } from 'react-native';
 import { FlatList } from "react-native";
@@ -37,40 +38,45 @@ const index = () => {
 
     const [petList, setPetList] = useState<tamagochi[]>([])
 
-    const getTamagochis = () => {
-        const list: tamagochi[] = [
-            {
-                name: "Edivaldo",
-                pet_id: 0,
-                hunger: 50,
-                sleep: 50,
-                fun: 50,
-                is_sleeping: false
-            },
-            {
-                name: "Edivaldo",
-                pet_id: 0,
-                hunger: 50,
-                sleep: 50,
-                fun: 50,
-                is_sleeping: false
-            },
-            {
-                name: "Edivaldo",
-                pet_id: 0,
-                hunger: 0,
-                sleep: 0,
-                fun: 0,
-                is_sleeping: false
-            },
-        ]
+    const [loading, setLoading] = useState(true)
 
-        setPetList(list)
+    const { getTamagochis, updateTamagochi } = useDatabase()
+
+    const searchTamagochis = async () => {
+
+        const response = await getTamagochis()
+
+        setPetList(response)
     }
 
-    useEffect(() => {
-        getTamagochis()
-    }, [])
+    const updateAllTamagochis = () => {
+
+        petList.forEach(async (item) => {
+            updateTamagochi(item)
+        })
+        setLoading(false)
+    }
+
+    useFocusEffect(() => {
+
+        searchTamagochis()
+
+        if (loading) {
+            setTimeout(() => {
+                updateAllTamagochis()
+            }, 500)
+
+        }
+
+    })
+
+    if (loading) {
+        return (
+            <View>
+                <Text>Carregando</Text>
+            </View>
+        )
+    }
 
     return (
         <View style={styles.pageView}>
@@ -91,12 +97,11 @@ const index = () => {
                 renderItem={({ item, index }) => {
                     return (
                         <CharacterCard
+                            id={item.id}
                             name={item.name}
-                            pet_id={item.pet_id}
                             hunger={item.hunger}
                             sleep={item.sleep}
                             fun={item.fun}
-                            is_sleeping={item.is_sleeping}
                             key={index}
                         />
 

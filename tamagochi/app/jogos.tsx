@@ -3,6 +3,8 @@ import CharacterCard from "@/components/CharacterCard"
 import Header from "@/components/Header"
 import MinigameChard from "@/components/MinigameCard"
 import StatusInfo from "@/components/StatusInfo"
+import { useLocalSearchParams } from "expo-router"
+import { useEffect } from "react"
 import { View, Text, StyleSheet } from "react-native"
 
 const styles = StyleSheet.create({
@@ -30,6 +32,13 @@ const styles = StyleSheet.create({
 })
 
 const jogos = () => {
+
+  const params = useLocalSearchParams()
+
+  useEffect(() => {
+    console.log(params)
+  }, [])
+
   return (
     <View style={styles.minigamePage}>
       <Header title='Jogos' color={Colors.darkYellow} />
@@ -37,9 +46,9 @@ const jogos = () => {
         <MinigameChard Imagemini={require('@/assets/images/images.png')}
           Name="Tetris" Path="/Tetris" />
         <MinigameChard Imagemini={require('@/assets/images/snake.jpeg')}
-          Name="Snake" Path="/Snake" />
-        <MinigameChard Imagemini={require('@/assets/images/snake.jpeg')}
-          Name="Car Street" Path="/carStreet" />
+          Name="Snake" Path={`/Snake?id=${params.id}`} />
+        <MinigameChard Imagemini={require('@/assets/images/carStreetLogo.png')}
+          Name="Car Street" Path={`/carStreet?id=${params.id}`} />
       </View>
 
 

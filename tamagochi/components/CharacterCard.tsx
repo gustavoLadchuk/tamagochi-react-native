@@ -2,7 +2,7 @@ import * as React from 'react'
 import { NavigationContainer } from '@react-navigation/native';
 import { Button, Image, ImageSourcePropType, Linking, StyleSheet, Text, View } from "react-native";
 import StatusCalculation from "./StatusCalculation";
-import { Link, Redirect } from "expo-router";
+import { Link, Redirect, router } from "expo-router";
 import Colors from '@/assets/constants/Colors';
 import { tamagochi } from './Types/types';
 import { calculate } from './constants/statusCalculate';
@@ -29,12 +29,20 @@ const styles = StyleSheet.create({
 })
 
 
-const CharacterCard = ({ name, pet_id, hunger, sleep, fun, is_sleeping }: tamagochi) => {
+type tamagochiCard = {
+    id: number
+    name: string,
+    hunger: number,
+    sleep: number,
+    fun: number,
+}
+
+const CharacterCard = ({ id, name, hunger, sleep, fun }: tamagochiCard) => {
 
     const status = calculate(hunger + sleep + fun)
 
     return (
-        <Link href={hunger + sleep + fun > 0 ? "/tamagochiDetails" : "/deleteTamagochi"}>
+        <Link href={hunger + sleep + fun > 0 ? `/${id}` : "/deleteTamagochi"}>
             <View style={styles.cardContainer}>
                 <View style={styles.CardImage}>
                     <Image source={require("../assets/images/hamster.png")} />

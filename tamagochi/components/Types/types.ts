@@ -15,12 +15,14 @@ export enum Direction {
 }
 
 export type tamagochi = {
+    id: number
     name: string,
     pet_id: number,
     hunger: number,
     sleep: number,
     fun: number,
-    is_sleeping: boolean
+    is_sleeping: boolean,
+    last_update: string
 }
 
 

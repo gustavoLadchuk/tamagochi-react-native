@@ -2,6 +2,8 @@ import Header from "@/components/Header";
 import { Button, StyleSheet, Text, TextInput, View, Image, Pressable, ImageSourcePropType, ImageBackground } from "react-native";
 import { useState } from "react";
 import TamagochiSprite from "@/components/TamagochiSprite";
+import { useDatabase } from "@/hooks/useDatabase";
+import { router } from "expo-router";
 
 const styles = StyleSheet.create({
     petContainer: {
@@ -60,8 +62,8 @@ const styles = StyleSheet.create({
     },
     tamagochiContainer: {
         position: "absolute",
-        left: 50,
-        bottom: 0
+        left: 40,
+        bottom: 30
     }
 })
 
@@ -113,13 +115,21 @@ const createTamagochi = () => {
 
     const [selectedPet, setSelectedPet] = useState(0)
 
+    const { newTamagochi } = useDatabase()
+
     const handleSelectTamagochi = (index: number) => {
+        console.log(index)
         setSelectedPet(index)
     }
 
-    const handleCreateTamagochi = () => {
-        console.log(name)
-        console.log(selectedPet)
+    const handleCreateTamagochi = async () => {
+        try {
+            const response = await newTamagochi({ name: name, pet_id: selectedPet })
+            router.replace("/")
+        } catch (error) {
+            console.log(error)
+        }
+
     }
 
     return (

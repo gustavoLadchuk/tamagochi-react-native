@@ -20,10 +20,8 @@ const styles = StyleSheet.create({
 })
 
 
-const InteractionButton = ({ room, eatFunc, sleepFunc }:
-    { room: number, eatFunc: () => void, sleepFunc: () => void }) => {
-
-    const [message, setMessage] = useState("")
+const InteractionButton = ({ id, room, eatFunc, sleepFunc, disabled }:
+    { id: number, room: number, eatFunc: () => void, sleepFunc: () => void, disabled: boolean }) => {
 
     const buttonProps = [
         {
@@ -50,8 +48,16 @@ const InteractionButton = ({ room, eatFunc, sleepFunc }:
     }
 
     if (room === 0) {
+
+        if (disabled)
+            return (
+                <View style={[styles.button, { backgroundColor: buttonProps[room].color }]}>
+                    <Text style={styles.buttonText}>{buttonProps[room].title}</Text>
+                </View>
+            )
+
         return (
-            <Link href={"/jogos"}>
+            <Link href={`/jogos?id=${id}`}>
                 <View style={[styles.button, { backgroundColor: buttonProps[room].color }]}>
                     <Text style={styles.buttonText}>{buttonProps[room].title}</Text>
                 </View>
@@ -60,7 +66,7 @@ const InteractionButton = ({ room, eatFunc, sleepFunc }:
     }
 
     return (
-        <Pressable onPress={handlePressButton}>
+        <Pressable onPress={handlePressButton} disabled={disabled}>
             <View style={[styles.button, { backgroundColor: buttonProps[room].color }]}>
                 <Text style={styles.buttonText}>{buttonProps[room].title}</Text>
             </View>

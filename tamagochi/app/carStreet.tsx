@@ -1,6 +1,11 @@
-// import React, { useState, useEffect } from 'react';
-// import { Image, StyleSheet, Text, View } from 'react-native';
-// import { Gyroscope } from 'expo-sensors';
+import React, { useState, useEffect } from 'react';
+import { Button, Image, Pressable, StyleSheet, Text, View } from 'react-native';
+import { Gyroscope } from 'expo-sensors';
+import { useLocalSearchParams } from 'expo-router';
+import { useDatabase } from '@/hooks/useDatabase';
+import { tamagochi } from '@/components/Types/types';
+import GameOver from '@/components/GameOver';
+
 
 const styles = StyleSheet.create({
     container: {
@@ -26,12 +31,22 @@ const styles = StyleSheet.create({
     obstacle1: {
         width: "30%",
         height: 100,
-        backgroundColor: "red"
+        justifyContent: "center",
+        alignItems: "center"
+    },
+    obstacleImage1: {
+        width: 70,
+        height: 70,
     },
     obstacle2: {
         width: "50%",
         height: 200,
-        backgroundColor: "yellow"
+        justifyContent: "center",
+        alignItems: "center"
+    },
+    obstacleImage2: {
+        width: "100%",
+        height: 200
     },
     obstacle3: {
         width: "100%",
@@ -47,6 +62,12 @@ const styles = StyleSheet.create({
         width: 200,
         height: 100,
         backgroundColor: "green"
+    },
+    scoreText: {
+        color: "white",
+        fontSize: 15,
+        position: "absolute",
+        top: 0
     }
 });
 
@@ -54,19 +75,17 @@ const styles = StyleSheet.create({
 
 const Obstacle = ({ type, positionX, positionY }: { type: number, positionX: number, positionY: number }) => {
 
-
-
     if (type == 1) {
         return (
             <View style={[styles.obstacle1, { top: positionY, left: positionX }]}>
-
+                <Image style={styles.obstacleImage1} source={require("@/assets/images/cone.png")} />
             </View>
         )
     }
     else if (type == 2) {
         return (
             <View style={[styles.obstacle2, { top: positionY, left: positionX > 50 ? 70 : -70 }]}>
-
+                <Image style={styles.obstacleImage2} source={require("@/assets/images/caminhao.png")} />
             </View>
         )
     }
@@ -74,10 +93,10 @@ const Obstacle = ({ type, positionX, positionY }: { type: number, positionX: num
         return (
             <View style={[styles.obstacle3, { top: positionY }]}>
                 <View style={styles.obstacle1}>
-
+                    <Image style={styles.obstacleImage1} source={require("@/assets/images/cone.png")} />
                 </View>
                 <View style={styles.obstacle1}>
-
+                    <Image style={styles.obstacleImage1} source={require("@/assets/images/cone.png")} />
                 </View>
             </View>
 
@@ -91,11 +110,25 @@ const Obstacle = ({ type, positionX, positionY }: { type: number, positionX: num
 
 }
 
-import React, { useState, useEffect } from 'react';
-import { Button, Image, Pressable, StyleSheet, Text, View } from 'react-native';
-import { Gyroscope } from 'expo-sensors';
+
 
 export default function carStreet() {
+
+    const params = useLocalSearchParams()
+
+    const { getTamagochiById, updateTamagochi } = useDatabase()
+
+    const [pet, setPet] = useState<tamagochi>({
+        "id": 0,
+        "name": "",
+        "pet_id": 0,
+        "fun": 0,
+        "sleep": 0,
+        "hunger": 0,
+        "is_sleeping": false,
+        "last_update": ""
+    })
+
     const [gyroscopeData, setGyroscopeData] = useState({
         x: 0,
         y: 0,
@@ -110,13 +143,15 @@ export default function carStreet() {
 
     const maxPositionY = 800
 
-    const minPositionX = -80
+    const minPositionX = -100
 
     const [obstaclePositionX, setObstaclePositionX] = useState(minPositionX)
 
     const [obstaclePositionY, setObstaclePositionY] = useState(minPositionY)
 
-    const [speed, setSpeed] = useState(15)
+    const [speed, setSpeed] = useState(10)
+
+    const [score, setScore] = useState(0)
 
 
     const [position, setPosition] = useState(0)
@@ -136,20 +171,20 @@ export default function carStreet() {
     const checkColision = () => {
         if (obstaclePositionY > 10) {
 
-            if (obstacleType == 3 && obstaclePositionY < 70) {
-                if (position < -10 || position > 40) {
+            if (obstacleType == 3 && obstaclePositionY < 280) {
+                if (position < -25 || position > 45) {
                     setRunning(false)
                 }
             }
 
-            if (obstacleType == 2 && obstaclePositionY < 280) {
-                if ((obstaclePositionX <= 50 && position < 30) || (obstaclePositionX > 50 && position > -20)) {
+            if (obstacleType == 2 && obstaclePositionY < 360) {
+                if ((obstaclePositionX <= 50 && position < 25) || (obstaclePositionX > 50 && position > -25)) {
                     setRunning(false)
                 }
             }
 
-            if (obstacleType == 1 && obstaclePositionY < 70) {
-                if (position < obstaclePositionX && position > obstaclePositionX + 100) {
+            if (obstacleType == 1 && obstaclePositionY < 280) {
+                if (position > obstaclePositionX - 65 && position < obstaclePositionX + 60) {
                     setRunning(false)
                 }
             }
@@ -168,11 +203,12 @@ export default function carStreet() {
 
             if (obstaclePositionY <= maxPositionY) setObstaclePositionY(obstaclePositionY + speed)
 
-            if (obstaclePositionY == maxPositionY) {
+            if (obstaclePositionY >= maxPositionY) {
                 setObstaclePositionY(minPositionY)
-                setObstaclePositionX(Math.floor(Math.random() * 100))
+                setScore(score + 10)
+                setObstaclePositionX(Math.floor(Math.random() * 200) - 100)
                 setObstacleType(Math.floor(Math.random() * 3) + 1)
-                //setObstacleType(1)
+                setSpeed(speed + 0.1)
             }
 
 
@@ -182,32 +218,48 @@ export default function carStreet() {
 
     }, [gyroscopeData.z])
 
+    const findTamagochi = async () => {
+        const pet = await getTamagochiById(Number(params.id))
+        setPet(pet)
+    }
+
+    useEffect(() => {
+        findTamagochi()
+    }, [])
+
     const restart = () => {
         if (!isRunning) {
             setObstaclePositionY(minPositionY)
             setRunning(true)
             setPosition(0)
             setObstacleType(Math.floor(Math.random() * 3) + 1)
+            setScore(0)
+            setSpeed(10)
         }
+    }
+
+    const addFun = async () => {
+        if (score > 0)
+            await updateTamagochi({ ...pet, fun: (pet.fun + score / 2 <= 100 ? pet.fun + score / 2 : 100) })
+    }
+
+    if (!isRunning) {
+        addFun()
     }
 
     if (isRunning) {
         return (
             <View style={styles.container}>
                 <View style={styles.road}>
+                    <Text style={styles.scoreText}>{score}</Text>
                     <Obstacle type={obstacleType} positionX={obstaclePositionX} positionY={obstaclePositionY} />
-                    <Text style={{ color: "white" }}>{position}</Text>
-                    <Text style={{ color: "white" }}>{obstaclePositionX}</Text>
                     <Image source={require("@/assets/images/carro.png")} style={[styles.car, { left: (position) }]} />
                 </View>
             </View>
         );
     }
     return (
-        <View style={styles.gameOverScreen}>
-            <Text>Game Over</Text>
-            <Button onPress={restart} title='Reiniciar' />
-        </View>
+        <GameOver restart={restart} />
     )
 
 
