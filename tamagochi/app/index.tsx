@@ -4,7 +4,7 @@ import Header from "@/components/Header";
 import { tamagochi } from "@/components/Types/types";
 import { useDatabase } from "@/hooks/useDatabase";
 import { Link, useFocusEffect } from "expo-router";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { View, Text, Button, StyleSheet, Pressable } from 'react-native';
 import { FlatList } from "react-native";
 
@@ -55,20 +55,25 @@ const index = () => {
             updateTamagochi(item)
         })
         setLoading(false)
+
     }
 
-    useFocusEffect(() => {
+    useFocusEffect(
+        useCallback(() => {
+            searchTamagochis()
 
-        searchTamagochis()
+            if (loading) {
+                setTimeout(() => {
+                    updateAllTamagochis()
 
-        if (loading) {
-            setTimeout(() => {
-                updateAllTamagochis()
-            }, 500)
+                }, 500)
 
-        }
-
-    })
+            }
+            return () => {
+                setLoading(true)
+            }
+        }, [])
+    );
 
     if (loading) {
         return (
@@ -104,9 +109,7 @@ const index = () => {
                             fun={item.fun}
                             key={index}
                         />
-
                     )
-
                 }}
                 ItemSeparatorComponent={() => {
                     return (
@@ -114,8 +117,6 @@ const index = () => {
                     )
                 }}
             />
-
-
         </View>
     );
 }

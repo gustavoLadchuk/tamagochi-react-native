@@ -1,11 +1,11 @@
 import * as React from 'react'
 import { NavigationContainer } from '@react-navigation/native';
 import { Button, Image, ImageSourcePropType, Linking, StyleSheet, Text, View } from "react-native";
-import StatusCalculation from "./StatusCalculation";
+
 import { Link, Redirect, router } from "expo-router";
 import Colors from '@/assets/constants/Colors';
 import { tamagochi } from './Types/types';
-import { calculate } from './constants/statusCalculate';
+import { calculate } from '../assets/constants/statusCalculate';
 
 
 const styles = StyleSheet.create({
@@ -42,7 +42,7 @@ const CharacterCard = ({ id, name, hunger, sleep, fun }: tamagochiCard) => {
     const status = calculate(hunger + sleep + fun)
 
     return (
-        <Link href={hunger + sleep + fun > 0 ? `/${id}` : "/deleteTamagochi"}>
+        <Link href={hunger + sleep + fun > 0 ? `/${id}` : `/deleteTamagochi?id=${id}`}>
             <View style={styles.cardContainer}>
                 <View style={styles.CardImage}>
                     <Image source={require("../assets/images/hamster.png")} />

@@ -1,6 +1,5 @@
 import React from "react"
 import { View, Text, Image, Button, ImageSourcePropType, StyleSheet } from 'react-native'
-import StatusCalculation from "./StatusCalculation"
 import { Link } from "expo-router"
 import Colors from "@/assets/constants/Colors"
 
@@ -44,7 +43,7 @@ type prop = {
 
 const MinigameChard = ({ Imagemini, Name, Path }: prop) => {
     return (
-        <Link href={Path}>
+        <Link href={`/${Path}`}>
             <View style={styles.cardContainer}>
                 <View>
                     <Image style={styles.MinigameImage} source={Imagemini} />

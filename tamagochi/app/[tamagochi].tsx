@@ -11,7 +11,7 @@ import StatusHeader from '@/components/StatusHeader';
 import PetInfo from '@/components/PetInfo';
 import { useDatabase } from '@/hooks/useDatabase';
 import { tamagochi } from '@/components/Types/types';
-import { calculate } from '@/components/constants/statusCalculate';
+import { calculate } from '@/assets/constants/statusCalculate';
 
 
 

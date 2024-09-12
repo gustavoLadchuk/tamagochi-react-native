@@ -61,6 +61,35 @@ export function useDatabase() {
 
     }
 
+    async function deleteTamagochi({ id }: { id: number }) {
+        const Query = await database.prepareAsync(`
+            DELETE FROM pet WHERE id = $id
+            `)
+        try {
+            await Query.executeAsync({ $id: id });
+        } catch (error) {
+            console.log(error);
+        } finally {
+            await Query.finalizeAsync().catch((error) => { console.log(error) });
+        }
 
-    return { newTamagochi, getTamagochis, getTamagochiById, updateTamagochi }
+    }
+
+    // async function killTamagochi() {
+
+    //     const Query = await database.prepareAsync(`
+    //         UPDATE pet SET hunger = $hunger, sleep = $sleep, fun = $fun WHERE id = $id
+    //         `)
+    //     try {
+    //         await Query.executeAsync({ $hunger: 0, $sleep: 0, $fun: 0, $id: 1 });
+    //     } catch (error) {
+    //         console.log(error);
+    //     } finally {
+    //         await Query.finalizeAsync().catch((error) => { console.log(error) });
+    //     }
+
+    // }
+
+
+    return { newTamagochi, getTamagochis, getTamagochiById, updateTamagochi, deleteTamagochi }
 }

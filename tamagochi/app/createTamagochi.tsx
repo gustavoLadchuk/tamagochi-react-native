@@ -1,5 +1,5 @@
 import Header from "@/components/Header";
-import { Button, StyleSheet, Text, TextInput, View, Image, Pressable, ImageSourcePropType, ImageBackground } from "react-native";
+import { Button, StyleSheet, Text, TextInput, View, Image, Pressable, ImageSourcePropType, ImageBackground, ScrollView } from "react-native";
 import { useState } from "react";
 import TamagochiSprite from "@/components/TamagochiSprite";
 import { useDatabase } from "@/hooks/useDatabase";
@@ -28,7 +28,8 @@ const styles = StyleSheet.create({
     },
     createContainer: {
         backgroundColor: "white",
-        flex: 1,
+        width: "100%",
+        height: 720,
         alignItems: "center",
         gap: 10
     },
@@ -45,7 +46,7 @@ const styles = StyleSheet.create({
     petPreviewContainer: {
         borderStyle: "solid",
         borderWidth: 3,
-        height: "50%",
+        height: 350,
         width: "100%",
         overflow: "hidden"
     },
@@ -133,43 +134,45 @@ const createTamagochi = () => {
     }
 
     return (
-        <View style={styles.createContainer}>
-            <Header title="Novo Tamagochi" color="green" />
-            <TextInput
-                placeholder="Nome do bixinho"
-                style={styles.input}
-                value={name}
-                onChangeText={setName}
-            />
-            <Text style={styles.petSelectionTitle}>
-                Selecione seu bixinho:
-            </Text>
-            <View style={styles.petSelectionContainer}>
+        <ScrollView>
+            <View style={styles.createContainer}>
+                <Header title="Novo Tamagochi" color="green" />
+                <TextInput
+                    placeholder="Nome do bixinho"
+                    style={styles.input}
+                    value={name}
+                    onChangeText={setName}
+                />
+                <Text style={styles.petSelectionTitle}>
+                    Selecione seu bixinho:
+                </Text>
+                <View style={styles.petSelectionContainer}>
 
-                {petList.map((item, index) => {
-                    return (
-                        <SelectPet
-                            index={index}
-                            iconImg={item.iconImg}
-                            isSelected={selectedPet == index}
-                            onPress={handleSelectTamagochi}
-                            key={index}
-                        />
-                    )
-                })}
-            </View>
-            <View style={styles.petPreviewContainer}>
-                <ImageBackground source={require('@/assets/images/sala.jpg')} style={styles.petPreviewBackground} resizeMode="cover">
-                    <View style={styles.tamagochiContainer}>
-                        <TamagochiSprite scale={5} TamagochiImage={petList[selectedPet].sprite} />
-                    </View>
-                </ImageBackground>
+                    {petList.map((item, index) => {
+                        return (
+                            <SelectPet
+                                index={index}
+                                iconImg={item.iconImg}
+                                isSelected={selectedPet == index}
+                                onPress={handleSelectTamagochi}
+                                key={index}
+                            />
+                        )
+                    })}
+                </View>
+                <View style={styles.petPreviewContainer}>
+                    <ImageBackground source={require('@/assets/images/sala.jpg')} style={styles.petPreviewBackground} resizeMode="cover">
+                        <View style={styles.tamagochiContainer}>
+                            <TamagochiSprite scale={5} TamagochiImage={petList[selectedPet].sprite} />
+                        </View>
+                    </ImageBackground>
 
+                </View>
+                <View>
+                    <Button title="Criar Tamagochi" onPress={handleCreateTamagochi} disabled={!name} />
+                </View>
             </View>
-            <View>
-                <Button title="Criar Tamagochi" onPress={handleCreateTamagochi} disabled={!name} />
-            </View>
-        </View>
+        </ScrollView>
     );
 }
 
