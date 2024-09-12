@@ -5,41 +5,18 @@ import { tamagochi } from "@/components/Types/types";
 import { useDatabase } from "@/hooks/useDatabase";
 import { Link, useFocusEffect } from "expo-router";
 import React, { useEffect, useState } from "react";
-import { View, Text, Button, StyleSheet, Pressable } from 'react-native';
+import { View, Text, Button, StyleSheet, Pressable, ActivityIndicator } from 'react-native';
 import { FlatList } from "react-native";
 
-
-const styles = StyleSheet.create({
-    pageView: {
-        flex: 1,
-        alignItems: "center",
-        gap: 10
-    },
-    buttonContainer: {
-        alignItems: "center",
-        marginTop: 5
-    },
-    buttonView: {
-        width: 150,
-        height: 40,
-        backgroundColor: Colors.softGreen,
-        alignItems: "center",
-        justifyContent: "center",
-        borderRadius: 10
-    },
-    listContainer: {
-        width: "100%",
-        gap: 10,
-        alignItems: "center"
-    }
-})
+/*################################################################################################*/
 
 const index = () => {
 
+    //Declaração dos useStates. 
     const [petList, setPetList] = useState<tamagochi[]>([])
-
     const [loading, setLoading] = useState(true)
-
+    
+    //integração da database na pagina inicial.
     const { getTamagochis, updateTamagochi } = useDatabase()
 
     const searchTamagochis = async () => {
@@ -49,6 +26,7 @@ const index = () => {
         setPetList(response)
     }
 
+    //atualizar os status do tamagochi.
     const updateAllTamagochis = () => {
 
         petList.forEach(async (item) => {
@@ -69,11 +47,14 @@ const index = () => {
         }
 
     })
-
+        
     if (loading) {
         return (
-            <View>
-                <Text>Carregando</Text>
+            <View style={{alignItems: "center",
+                justifyContent: "center",
+                alignSelf: 'center',
+                marginTop: 400,}}>
+            <ActivityIndicator color={Colors.deepPurple}/>
             </View>
         )
     }
@@ -119,5 +100,36 @@ const index = () => {
         </View>
     );
 }
+
+/*################################################################################################*/
+//StyleSheet
+const styles = StyleSheet.create({
+    pageView: {
+        flex: 1,
+        alignItems: "center",
+        gap: 10
+    },
+    buttonContainer: {
+        alignItems: "center",
+        marginTop: 5
+    },
+    buttonView: {
+        width: 150,
+        height: 40,
+        backgroundColor: Colors.softGreen,
+        alignItems: "center",
+        justifyContent: "center",
+        alignSelf: 'center',
+        marginTop: 400,
+        borderRadius: 10,
+    },
+    listContainer: {
+        width: "100%",
+        gap: 10,
+        alignItems: "center"
+    }
+})
+
+/*################################################################################################*/
 
 export default index;

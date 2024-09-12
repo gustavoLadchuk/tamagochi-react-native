@@ -4,7 +4,6 @@ import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 import 'react-native-reanimated';
 
-import { useColorScheme } from '@/hooks/useColorScheme';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { SQLiteProvider } from 'expo-sqlite';
 import { initDatabase } from './Database/initDatabase';
@@ -12,7 +11,6 @@ import { initDatabase } from './Database/initDatabase';
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
-  const colorScheme = useColorScheme();
   const [loaded] = useFonts({
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
   });

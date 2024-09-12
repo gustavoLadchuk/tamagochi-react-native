@@ -1,6 +1,5 @@
 import React from "react";
-import {View,Text} from 'react-native';
-import Game from "@/components/SnakeGame";
+import Game from "@/components/SnakeComponents/SnakeGame";
 
 const Snake = () => <Game/>
 

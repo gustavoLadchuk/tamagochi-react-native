@@ -1,23 +1,26 @@
 import * as React from "react";
 import { GestureHandlerRootView, PanGestureHandler } from "react-native-gesture-handler";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { coordinate, Direction, GestureEventType, tamagochi } from "./Types/types";
-import { StyleSheet, View } from "react-native";
-import Snake from "./TheSnakeItself";
+import { coordinate, Direction, GestureEventType, tamagochi } from "../Types/types";
+import { StyleSheet, View, Button,Text} from "react-native";
+import Snake from "../SnakeComponents/TheSnakeItself";
 import Colors from "@/assets/constants/Colors";
-import { checkGameOver } from "./Utils/CheckGameOver";
+import { checkGameOver } from "../Utils/CheckGameOver";
 import Food from "./SnakeFood";
-import { checkEatsFood } from "./Utils/CheckEatsFood";
-import { randomFoodPosition } from "./Utils/randomFoodPosition";
-import GameOver from "./GameOver";
+import { checkEatsFood } from "../Utils/CheckEatsFood";
+import { randomFoodPosition } from "../Utils/randomFoodPosition";
+import GameOver from "../GameOver";
 import { useDatabase } from "@/hooks/useDatabase";
 import { useLocalSearchParams } from "expo-router";
+
+/*################################################################################################*/
 
 const SNAKE_INITIAL_POSITION = [{ x: 5, y: 5 }];
 const FOOD_INITIAL_POSITION = { x: 5, y: 20 };
 const GAME_BOUNDS = { xMin: 0, xMax: 35, yMin: 0, yMax: 78 };
 const MOVE_INTERVAL = 100;
 const SCORE_INCREMENT = 10;
+
+/*################################################################################################*/
 
 export default function Game(): JSX.Element {
     const [direction, setDirection] = React.useState<Direction>(Direction.Right);
@@ -79,7 +82,7 @@ export default function Game(): JSX.Element {
                 newHead.y += 1;
                 break;
             case Direction.Left:
-                newHead.x -= 1;
+                newHead.x -= 1; 
                 break;
             case Direction.Right:
                 newHead.x += 1;
@@ -119,7 +122,16 @@ export default function Game(): JSX.Element {
     }
 
     const restart = () => {
-        //nao sei como reiniciar esse jogo
+        setSnake(SNAKE_INITIAL_POSITION);
+        setFood(FOOD_INITIAL_POSITION);
+        setIsGameOver(false);
+        setScore(0);
+        setDirection(Direction.Right);
+        setIsPaused(false);
+    }
+
+    function restartar(){
+        restart();
     }
 
     const addFun = async () => {
@@ -139,6 +151,8 @@ export default function Game(): JSX.Element {
     return (
 
         <GestureHandlerRootView style={styles.GameContainer}>
+            <Button title="Pausar" onPress={() => setIsPaused(prevState => !prevState)}></Button>
+            <Text>{score}</Text>
             <PanGestureHandler onGestureEvent={handleGesture}>
                 <View style={styles.boundaries}>
                     <Food x={food.x} y={food.y} />
@@ -150,6 +164,7 @@ export default function Game(): JSX.Element {
     )
 }
 
+/*################################################################################################*/
 
 const styles = StyleSheet.create({
     boundaries: {
@@ -165,6 +180,8 @@ const styles = StyleSheet.create({
         flex: 1,
     },
 })
+
+/*################################################################################################*/
 
 
 

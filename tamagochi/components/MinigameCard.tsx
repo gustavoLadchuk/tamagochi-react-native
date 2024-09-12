@@ -1,6 +1,5 @@
 import React from "react"
-import { View, Text, Image, Button, ImageSourcePropType, StyleSheet } from 'react-native'
-import StatusCalculation from "./StatusCalculation"
+import { View, Text, Image, ImageSourcePropType, StyleSheet } from 'react-native'
 import { Link } from "expo-router"
 import Colors from "@/assets/constants/Colors"
 

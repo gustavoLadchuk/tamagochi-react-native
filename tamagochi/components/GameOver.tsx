@@ -1,5 +1,7 @@
 import { Button, StyleSheet, Text, View } from "react-native";
 
+/*################################################################################################*/
+
 const styles = StyleSheet.create({
     gameOverScreen: {
         flex: 1,
@@ -12,6 +14,8 @@ const styles = StyleSheet.create({
         backgroundColor: "green"
     },
 })
+
+/*################################################################################################*/
 
 const GameOver = ({ restart }: { restart: () => void }) => {
 
@@ -28,3 +32,5 @@ const GameOver = ({ restart }: { restart: () => void }) => {
 }
 
 export default GameOver;
+
+/*################################################################################################*/
