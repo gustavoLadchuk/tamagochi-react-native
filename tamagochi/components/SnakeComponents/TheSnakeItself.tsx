@@ -1,12 +1,17 @@
 import { Fragment } from "react"
-import { coordinate } from "./Types/types"
+import { coordinate } from "../Types/types"
 import { StyleSheet, View } from "react-native"
-import tamagochiStyle from "@/assets/constants/style"
 import Colors from "@/assets/constants/Colors"
+
+/*################################################################################################*/
+
 interface snakeProps {
     snake: coordinate[],
 
 }
+
+/*################################################################################################*/
+
 export default function Snake ({snake}: snakeProps): JSX.Element {
     return (
         <Fragment>
@@ -21,11 +26,16 @@ export default function Snake ({snake}: snakeProps): JSX.Element {
     )
 }
 
+/*################################################################################################*/
+
 const styles = StyleSheet.create({
     snake: {
         width: 15,
         height: 15,
-        backgroundColor: Colors.lavenderPurple,
-        position: 'absolute'
+        backgroundColor: "#368154",
+        position: 'absolute',
+        borderRadius: 12,
     }
 })
+
+/*################################################################################################*/

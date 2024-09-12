@@ -1,77 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Image, Pressable, StyleSheet, Text, View } from 'react-native';
+import { Image,StyleSheet, Text, View } from 'react-native';
 import { Gyroscope } from 'expo-sensors';
 import { useLocalSearchParams } from 'expo-router';
 import { useDatabase } from '@/hooks/useDatabase';
 import { tamagochi } from '@/components/Types/types';
 import GameOver from '@/components/GameOver';
 
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: "green"
-    },
-    text: {
-        fontSize: 18,
-    },
-    car: {
-        width: 150,
-        height: 150
-    },
-    road: {
-        backgroundColor: "black",
-        height: "100%",
-        width: "80%",
-        alignItems: "center",
-        justifyContent: "flex-end"
-    },
-    obstacle1: {
-        width: "30%",
-        height: 100,
-        justifyContent: "center",
-        alignItems: "center"
-    },
-    obstacleImage1: {
-        width: 70,
-        height: 70,
-    },
-    obstacle2: {
-        width: "50%",
-        height: 200,
-        justifyContent: "center",
-        alignItems: "center"
-    },
-    obstacleImage2: {
-        width: "100%",
-        height: 200
-    },
-    obstacle3: {
-        width: "100%",
-        justifyContent: "space-between",
-        flexDirection: "row"
-    },
-    gameOverScreen: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-    restartButton: {
-        width: 200,
-        height: 100,
-        backgroundColor: "green"
-    },
-    scoreText: {
-        color: "white",
-        fontSize: 15,
-        position: "absolute",
-        top: 0
-    }
-});
-
-
+/*################################################################################################*/
 
 const Obstacle = ({ type, positionX, positionY }: { type: number, positionX: number, positionY: number }) => {
 
@@ -110,7 +45,7 @@ const Obstacle = ({ type, positionX, positionY }: { type: number, positionX: num
 
 }
 
-
+/*################################################################################################*/
 
 export default function carStreet() {
 
@@ -264,5 +199,69 @@ export default function carStreet() {
 
 
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: "green"
+    },
+    text: {
+        fontSize: 18,
+    },
+    car: {
+        width: 150,
+        height: 150
+    },
+    road: {
+        backgroundColor: "black",
+        height: "100%",
+        width: "80%",
+        alignItems: "center",
+        justifyContent: "flex-end"
+    },
+    obstacle1: {
+        width: "30%",
+        height: 100,
+        justifyContent: "center",
+        alignItems: "center"
+    },
+    obstacleImage1: {
+        width: 70,
+        height: 70,
+    },
+    obstacle2: {
+        width: "50%",
+        height: 200,
+        justifyContent: "center",
+        alignItems: "center"
+    },
+    obstacleImage2: {
+        width: "100%",
+        height: 200
+    },
+    obstacle3: {
+        width: "100%",
+        justifyContent: "space-between",
+        flexDirection: "row"
+    },
+    gameOverScreen: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    restartButton: {
+        width: 200,
+        height: 100,
+        backgroundColor: "green"
+    },
+    scoreText: {
+        color: "white",
+        fontSize: 15,
+        position: "absolute",
+        top: 0
+    }
+});
 
 

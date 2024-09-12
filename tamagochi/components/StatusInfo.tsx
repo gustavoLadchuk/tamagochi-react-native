@@ -1,6 +1,5 @@
 import { StyleSheet, Text, View } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import Colors from '@/assets/constants/Colors';
 
 const styles = StyleSheet.create({
     statusIcon: {

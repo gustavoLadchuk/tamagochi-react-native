@@ -1,10 +1,14 @@
 import React from "react";
 import { StyleSheet, Text, View } from 'react-native'
 
+/*################################################################################################*/
+
 type headerProps = {
     title: string,
     color: string
 }
+
+/*################################################################################################*/
 
 const style = StyleSheet.create({
     HeaderContainer: {
@@ -25,5 +29,6 @@ const Header = ({ title, color }: headerProps) => {
     );
 }
 
+/*################################################################################################*/
 
 export default Header;

@@ -5,73 +5,14 @@ import TamagochiSprite from "@/components/TamagochiSprite";
 import { useDatabase } from "@/hooks/useDatabase";
 import { router } from "expo-router";
 
-const styles = StyleSheet.create({
-    petContainer: {
-        width: 70,
-        height: 70,
-        borderStyle: "solid",
-        borderWidth: 3,
-        alignItems: "center",
-        justifyContent: "center",
-        marginHorizontal: 7
-    },
-    input: {
-        height: 40,
-        width: "70%",
-        margin: 12,
-        borderWidth: 2,
-        padding: 5
-    },
-    petIcon: {
-        width: 64,
-        height: 64
-    },
-    createContainer: {
-        backgroundColor: "white",
-        width: "100%",
-        height: 720,
-        alignItems: "center",
-        gap: 10
-    },
-    petSelectionTitle: {
-        fontSize: 18,
-        marginBottom: 10,
-        fontWeight: "bold"
-    },
-    petSelectionContainer: {
-        flexDirection: "row",
-        width: "70%",
-        justifyContent: "space-between",
-    },
-    petPreviewContainer: {
-        borderStyle: "solid",
-        borderWidth: 3,
-        height: 350,
-        width: "100%",
-        overflow: "hidden"
-    },
-    petPreviewBackground: {
-        width: "100%",
-        height: "100%"
-    },
-    bigTamagochiSprite: {
-        width: 300,
-        height: 300,
-        position: "absolute",
-        top: -30,
-        left: 12
-    },
-    tamagochiContainer: {
-        position: "absolute",
-        left: 40,
-        bottom: 30
-    }
-})
+/*################################################################################################*/
 
 type pet = {
     iconImg: ImageSourcePropType
     sprite: ImageSourcePropType
 }
+
+/*################################################################################################*/
 
 const petList: pet[] =
     [{
@@ -87,7 +28,7 @@ const petList: pet[] =
         sprite: require('@/assets/images/cobra.png'),
     }]
 
-
+/*################################################################################################*/
 
 const SelectPet = ({ index, iconImg, isSelected, onPress }: {
     index: number,
@@ -109,6 +50,8 @@ const SelectPet = ({ index, iconImg, isSelected, onPress }: {
         </Pressable>
     );
 }
+
+/*################################################################################################*/
 
 const createTamagochi = () => {
 
@@ -134,7 +77,7 @@ const createTamagochi = () => {
     }
 
     return (
-        <ScrollView>
+        <ScrollView style={{ height: 750 }}>
             <View style={styles.createContainer}>
                 <Header title="Novo Tamagochi" color="green" />
                 <TextInput
@@ -175,5 +118,71 @@ const createTamagochi = () => {
         </ScrollView>
     );
 }
+
+/*################################################################################################*/
+
+const styles = StyleSheet.create({
+    petContainer: {
+        width: 70,
+        height: 70,
+        borderStyle: "solid",
+        borderWidth: 3,
+        alignItems: "center",
+        justifyContent: "center",
+        marginHorizontal: 7
+    },
+    input: {
+        height: 40,
+        width: "70%",
+        margin: 12,
+        borderWidth: 2,
+        padding: 5
+    },
+    petIcon: {
+        width: 64,
+        height: 64,
+    },
+    createContainer: {
+        backgroundColor: "white",
+        flex: 1,
+        alignItems: "center",
+        gap: 10
+    },
+    petSelectionTitle: {
+        fontSize: 18,
+        marginBottom: 10,
+        fontWeight: "bold"
+    },
+    petSelectionContainer: {
+        flexDirection: "row",
+        width: "70%",
+        justifyContent: "space-between",
+    },
+    petPreviewContainer: {
+        borderStyle: "solid",
+        borderWidth: 3,
+        height: 400,
+        width: "100%",
+        overflow: "hidden"
+    },
+    petPreviewBackground: {
+        width: "100%",
+        height: "100%"
+    },
+    bigTamagochiSprite: {
+        width: 300,
+        height: 300,
+        position: "absolute",
+        top: -30,
+        left: 12
+    },
+    tamagochiContainer: {
+        position: "absolute",
+        left: 40,
+        bottom: 30
+    }
+})
+
+/*################################################################################################*/
 
 export default createTamagochi;

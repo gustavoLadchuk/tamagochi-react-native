@@ -1,24 +1,7 @@
 import { Link } from "expo-router";
-import { useState } from "react";
-import { Button, Pressable, StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 
-const styles = StyleSheet.create({
-    button: {
-        height: 50,
-        paddingHorizontal: 20,
-        justifyContent: "center",
-        alignItems: "center",
-        borderRadius: 5,
-        borderColor: "white",
-        borderWidth: 5
-    },
-    buttonText: {
-        fontSize: 18,
-        color: "white",
-        fontWeight: "bold"
-    }
-})
-
+/*################################################################################################*/
 
 const InteractionButton = ({ id, room, eatFunc, sleepFunc, disabled }:
     { id: number, room: number, eatFunc: () => void, sleepFunc: () => void, disabled?: boolean }) => {
@@ -40,6 +23,8 @@ const InteractionButton = ({ id, room, eatFunc, sleepFunc, disabled }:
             func: sleepFunc
         }
     ]
+
+    /*################################################################################################*/
 
     const handlePressButton = () => {
 
@@ -75,3 +60,22 @@ const InteractionButton = ({ id, room, eatFunc, sleepFunc, disabled }:
 }
 
 export default InteractionButton;
+
+/*################################################################################################*/
+
+const styles = StyleSheet.create({
+    button: {
+        height: 50,
+        paddingHorizontal: 20,
+        justifyContent: "center",
+        alignItems: "center",
+        borderRadius: 5,
+        borderColor: "white",
+        borderWidth: 5
+    },
+    buttonText: {
+        fontSize: 18,
+        color: "white",
+        fontWeight: "bold"
+    }
+})

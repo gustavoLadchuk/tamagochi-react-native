@@ -1,5 +1,4 @@
-import Colors from '@/assets/constants/Colors';
-import { View, Text, Image, ImageSourcePropType, StyleSheet } from 'react-native'
+import { View,Image, ImageSourcePropType, StyleSheet } from 'react-native'
 
 
 type props = {
