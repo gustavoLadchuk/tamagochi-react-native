@@ -4,7 +4,7 @@ import {StyleSheet, Text} from 'react-native'
 /*################################################################################################*/
 
 export default function Food({x,y}: coordinate): JSX.Element {
-    return <Text style={[{top: y * 10, left: x * 10}, styles.food]}> ඞ </Text> 
+    return <Text style={[{top: y * 10, left: x * 10}, styles.food]}>🍎</Text> 
 }
 
 /*################################################################################################*/

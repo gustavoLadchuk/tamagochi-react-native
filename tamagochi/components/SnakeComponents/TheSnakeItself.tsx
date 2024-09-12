@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     snake: {
         width: 15,
         height: 15,
-        backgroundColor: Colors.deepPurple,
+        backgroundColor: "#368154",
         position: 'absolute',
         borderRadius: 12,
     }

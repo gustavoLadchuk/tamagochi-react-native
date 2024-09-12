@@ -49,25 +49,22 @@ const CharacterCard = ({ id, name, hunger, sleep, fun }: tamagochiCard) => {
 
 
 
-                <View style={styles.CardText}>
-                    <Text style={{color: TextColor}}>
+                <View style={{justifyContent: 'center', alignContent: 'center', alignItems: 'center'}}>
+                   <View>
+                   <Text style={[{color: TextColor}, styles.PetName]}>
                         {name}
                     </Text>
-
-                    <View>
-                        <Text style={{color: TextColor}}>
+                    </View> 
+                        <Text style={styles.CardText}>
                             Fome: {hunger}%
                         </Text>
-                        <Text style={{color: TextColor, marginBottom: 10}}>
+                        <Text style={styles.CardText}>
                             Sono: {sleep}%
                         </Text>
-                        <Text style={{color: TextColor, marginBottom: 10}}>
+                        <Text style={styles.CardText}>
                             Diversão: {fun}%
                         </Text>
-                    </View>
-
-
-                    <Text style={{color: TextColor}}>
+                    <Text style={styles.CardText}>
                         Status:  {status}
                     </Text>
 
@@ -93,12 +90,18 @@ const styles = StyleSheet.create({
         borderRadius: 10
     },
     CardImage: {
+        borderRadius: 10,
         width: 100,
         height: 100,
     },
     CardText: {
-        gap: 10
+        color: 'white',
     },
+    PetName: {
+        marginBottom: 20,
+        fontSize: 20,
+        fontWeight: 'bold',
+    }
 })
 
 /*################################################################################################*/

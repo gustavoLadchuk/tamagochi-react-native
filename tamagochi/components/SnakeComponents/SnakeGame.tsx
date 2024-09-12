@@ -1,7 +1,7 @@
 import * as React from "react";
 import { GestureHandlerRootView, PanGestureHandler } from "react-native-gesture-handler";
 import { coordinate, Direction, GestureEventType, tamagochi } from "../Types/types";
-import { StyleSheet, View, Button,Text} from "react-native";
+import { StyleSheet, View, Button,Text, Pressable} from "react-native";
 import Snake from "../SnakeComponents/TheSnakeItself";
 import Colors from "@/assets/constants/Colors";
 import { checkGameOver } from "../Utils/CheckGameOver";
@@ -17,7 +17,7 @@ import { useLocalSearchParams } from "expo-router";
 const SNAKE_INITIAL_POSITION = [{ x: 5, y: 5 }];
 const FOOD_INITIAL_POSITION = { x: 5, y: 20 };
 const GAME_BOUNDS = { xMin: 0, xMax: 35, yMin: 0, yMax: 78 };
-const MOVE_INTERVAL = 100;
+const MOVE_INTERVAL = 30;
 const SCORE_INCREMENT = 10;
 
 /*################################################################################################*/
@@ -151,8 +151,10 @@ export default function Game(): JSX.Element {
     return (
 
         <GestureHandlerRootView style={styles.GameContainer}>
-            <Button title="Pausar" onPress={() => setIsPaused(prevState => !prevState)}></Button>
-            <Text>{score}</Text>
+            <View style={{flexDirection: 'row', justifyContent: 'center', gap: 19, alignItems: 'center'}}>
+            <Pressable style={{height: 30, width: 60, backgroundColor: '#EFF59F', borderRadius: 16, justifyContent: 'center', alignContent: 'center', alignItems: 'center'}}onPress={() => setIsPaused(prevState => !prevState)}><Text>Pausar</Text></Pressable>
+            <Text style={{fontSize: 21, borderRadius: 12, backgroundColor: '#EFF59F', width: 109, height: 30,}}>Score: {score}</Text>
+            </View>
             <PanGestureHandler onGestureEvent={handleGesture}>
                 <View style={styles.boundaries}>
                     <Food x={food.x} y={food.y} />
@@ -169,14 +171,12 @@ export default function Game(): JSX.Element {
 const styles = StyleSheet.create({
     boundaries: {
         flex: 1,
-        borderColor: Colors.royalPurple,
+        borderColor: '#335A0F',
         borderWidth: 3,
-        borderBottomLeftRadius: 10,
-        borderBottomRightRadius: 10,
-        backgroundColor: Colors.primaryYellow,
+        backgroundColor: "#D3FFAA",
     },
     GameContainer: {
-        backgroundColor: Colors.primaryYellow,
+        backgroundColor: "#136116",
         flex: 1,
     },
 })
