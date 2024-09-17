@@ -5,10 +5,11 @@ import InteractionButton from '@/components/InteractionButton';
 import { useFocusEffect, useLocalSearchParams } from 'expo-router';
 import StatusHeader from '@/components/StatusHeader';
 import { useDatabase } from '@/hooks/useDatabase';
-import { tamagochi } from '@/components/Types/types';
+import { changeButtonDirection, tamagochi } from '@/components/Types/types';
 import { calculate } from '@/assets/constants/statusCalculate';
 import ChangeButton from '@/components/ChangeButton';
 import { RoomContainer } from '@/components/RoomContainer';
+import LoadingScreen from '@/components/LoadingScreen';
 
 /*################################################################################################*/
 
@@ -62,13 +63,21 @@ export default function tamagochiDetails() {
     }
 
 
-    const changeRoom = (isLeftDirection: boolean) => {
+    const changeRoom = (direction: changeButtonDirection) => {
 
-        if (isLeftDirection && room === 0) return setRoom(2)
+        let newRoom = room
 
-        if (!isLeftDirection && room === 2) return setRoom(0)
+        if (direction == "left") newRoom = newRoom - 1
 
-        setRoom(isLeftDirection ? room - 1 : room + 1)
+        if (direction == "right") newRoom = newRoom + 1
+
+        console.log(newRoom < 0)
+
+        if (newRoom < 0) newRoom = 2
+
+        if (newRoom > 2) newRoom = 0
+
+        setRoom(newRoom)
 
         updateTamagochi(pet)
 
@@ -76,12 +85,15 @@ export default function tamagochiDetails() {
 
     const handleFeedButton = () => {
 
+        let newHunger = pet.hunger + 10
+
+        if (newHunger > 100) newHunger = 100
+
         setPet((pet) => ({
             ...pet,
-            hunger: pet.hunger + 10 <= 100 ? pet.hunger + 10 : 100
+            hunger: newHunger
         }))
-        updateAtributes({ ...pet, hunger: pet.hunger + 10 })
-
+        updateAtributes({ ...pet, hunger: newHunger })
 
     }
 
@@ -101,14 +113,7 @@ export default function tamagochiDetails() {
 
     if (loading) {
         return (
-            <View style={{
-                alignItems: "center",
-                justifyContent: "center",
-                alignSelf: 'center',
-                marginTop: 400,
-            }}>
-                <ActivityIndicator color={Colors.deepPurple} />
-            </View>
+           <LoadingScreen />
         )
     }
 
@@ -130,7 +135,7 @@ export default function tamagochiDetails() {
             <View style={styles.interactionContainer}>
 
                 <ChangeButton
-                    isLeftDirection={true}
+                    direction={"left"}
                     func={changeRoom}
                     disabled={saving || sleeping}
 
@@ -145,7 +150,7 @@ export default function tamagochiDetails() {
                 />
 
                 <ChangeButton
-                    isLeftDirection={false}
+                    direction={"right"}
                     func={changeRoom}
                     disabled={saving || sleeping}
                 />
@@ -174,10 +179,7 @@ export const styles = StyleSheet.create({
         fontWeight: "bold",
         fontSize: 18
     },
-    roomContainer: {
-        backgroundColor: "black",
-        height: "78%"
-    },
+
     statusContainer: {
         backgroundColor: Colors.darkYellow,
         width: "100%",
@@ -213,9 +215,7 @@ export const styles = StyleSheet.create({
         color: "white",
         fontSize: 20
     },
-    background: {
-        flex: 1
-    },
+
     playButton: {
         height: 50,
         paddingHorizontal: 20,
@@ -231,19 +231,8 @@ export const styles = StyleSheet.create({
         color: "white",
         fontWeight: "bold"
     },
-    changeButton: {
-        width: 50,
-        height: 50,
-        borderWidth: 3,
-        alignItems: "center",
-        justifyContent: "center"
-    },
-    lightOff: {
-        position: "absolute",
-        width: "100%",
-        height: 600,
-        top: 0
-    },
+
+
 })
 
 /*################################################################################################*/

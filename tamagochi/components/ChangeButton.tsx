@@ -1,28 +1,46 @@
-import { Pressable, View,  } from "react-native";
+import { Pressable, StyleSheet, View, } from "react-native";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import Colors from "@/assets/constants/Colors";
-import { styles } from "@/app/[tamagochi]";
+import { changeButtonDirection } from "./Types/types";
+
+
+const styles = StyleSheet.create({
+    changeButton: {
+        width: 50,
+        height: 50,
+        borderWidth: 3,
+        alignItems: "center",
+        justifyContent: "center"
+    }
+})
+
+
+
+type props = {
+    direction: changeButtonDirection,
+    func: (direction: changeButtonDirection) => void,
+    disabled: boolean
+}
 
 /*################################################################################################*/
 
-function ChangeButton({ isLeftDirection, func, disabled }:
-    { isLeftDirection: boolean, func: (isLeftDirection: boolean) => void, disabled: boolean }) {
-        let buttonChangeColor:string;
-        if(disabled){
-            buttonChangeColor = Colors.deepPurple;
-        }else{
-            buttonChangeColor = Colors.lavenderPurple;
-        }
+function ChangeButton({ direction, func, disabled }: props) {
+    let buttonChangeColor: string;
+    if (disabled) {
+        buttonChangeColor = Colors.deepPurple;
+    } else {
+        buttonChangeColor = Colors.lavenderPurple;
+    }
 
     const handlePressButton = () => {
-        func(isLeftDirection)
+        func(direction)
     }
 
 
     return (
         <Pressable onPress={handlePressButton} disabled={disabled}>
-            <View style={[{backgroundColor: buttonChangeColor},styles.changeButton]}>
-                <MaterialCommunityIcons name={isLeftDirection ? "chevron-left" : "chevron-right"} size={30} color="black" />
+            <View style={[{ backgroundColor: buttonChangeColor }, styles.changeButton]}>
+                <MaterialCommunityIcons name={`chevron-${direction}`} size={30} color="black" />
             </View>
         </Pressable>
 

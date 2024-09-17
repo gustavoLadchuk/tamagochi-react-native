@@ -1,6 +1,7 @@
 import Colors from "@/assets/constants/Colors";
 import CharacterCard from "@/components/CharacterCard";
 import Header from "@/components/Header";
+import LoadingScreen from "@/components/LoadingScreen";
 import { tamagochi } from "@/components/Types/types";
 import { useDatabase } from "@/hooks/useDatabase";
 import { Link, useFocusEffect } from "expo-router";
@@ -21,48 +22,34 @@ const index = () => {
 
     const searchTamagochis = async () => {
 
-        const response = await getTamagochis()
+        const oldPets = await getTamagochis()
 
-        setPetList(response)
-    }
-
-    //atualizar os status do tamagochi.
-    const updateAllTamagochis = () => {
-
-        petList.forEach(async (item) => {
+        oldPets.forEach(async (item) => {
             updateTamagochi(item)
         })
-        setLoading(false)
 
+        const newPets = await getTamagochis()
+
+        setPetList(newPets)
+
+        setLoading(false)
     }
 
     useFocusEffect(
         useCallback(() => {
+
             searchTamagochis()
 
-            if (loading) {
-                setTimeout(() => {
-                    updateAllTamagochis()
-
-                }, 500)
-
-            }
             return () => {
                 setLoading(true)
             }
         }, [])
     );
 
+
     if (loading) {
         return (
-            <View style={{
-                alignItems: "center",
-                justifyContent: "center",
-                alignSelf: 'center',
-                marginTop: 400,
-            }}>
-                <ActivityIndicator color={Colors.deepPurple} />
-            </View>
+            <LoadingScreen />
         )
     }
 

@@ -1,8 +1,24 @@
 import React from "react";
-import { View, ImageBackground } from "react-native";
+import { View, ImageBackground, StyleSheet } from "react-native";
 import PetInfo from "./PetInfo";
 import TamagochiSprite from "./TamagochiSprite";
-import { styles } from "@/app/[tamagochi]";
+
+const styles = StyleSheet.create({
+    lightOff: {
+        position: "absolute",
+        width: "100%",
+        height: 600,
+        top: 0
+    },
+    background: {
+        flex: 1
+    },
+    roomContainer: {
+        backgroundColor: "black",
+        height: "78%"
+    },
+})
+
 
 /*################################################################################################*/
 
@@ -43,7 +59,7 @@ export const RoomContainer = ({ room, name, status, pet_id, isLightOff }:
             sleeping: require(('@/assets/images/cobra-dormindo.png'))
         }
     ]
-    
+
     return (
         <View style={styles.roomContainer}>
             <ImageBackground resizeMode='cover' style={styles.background} source={roomData[room].image}>

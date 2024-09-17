@@ -25,4 +25,6 @@ export type tamagochi = {
     last_update: string
 }
 
+export type changeButtonDirection = | "left" | "right"
+
 
