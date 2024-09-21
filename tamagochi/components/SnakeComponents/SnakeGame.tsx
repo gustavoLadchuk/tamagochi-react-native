@@ -1,7 +1,7 @@
 import * as React from "react";
 import { GestureHandlerRootView, PanGestureHandler } from "react-native-gesture-handler";
 import { coordinate, Direction, GestureEventType, tamagochi } from "../Types/types";
-import { StyleSheet, View, Button,Text, Pressable} from "react-native";
+import { StyleSheet, View, Button, Text, Pressable } from "react-native";
 import Snake from "../SnakeComponents/TheSnakeItself";
 import Colors from "@/assets/constants/Colors";
 import { checkGameOver } from "../Utils/CheckGameOver";
@@ -17,6 +17,7 @@ import { useLocalSearchParams } from "expo-router";
 const SNAKE_INITIAL_POSITION = [{ x: 5, y: 5 }];
 const FOOD_INITIAL_POSITION = { x: 5, y: 20 };
 const GAME_BOUNDS = { xMin: 0, xMax: 35, yMin: 0, yMax: 78 };
+const FOOD_SPAWN_BOUNDS = { xMin: 0, xMax: 30, yMin: 0, yMax: 60 };
 const MOVE_INTERVAL = 30;
 const SCORE_INCREMENT = 10;
 
@@ -66,7 +67,7 @@ export default function Game(): JSX.Element {
     }, [snake, isGameOver, isPaused])
     const moveSnake = () => {
         const snakeHead = snake[0];
-        const newHead = { ...snakeHead } // creates a new SNAKE HEAD!
+        const newHead = { ...snakeHead }
 
         //game over
         if (checkGameOver(snakeHead, GAME_BOUNDS)) {
@@ -82,7 +83,7 @@ export default function Game(): JSX.Element {
                 newHead.y += 1;
                 break;
             case Direction.Left:
-                newHead.x -= 1; 
+                newHead.x -= 1;
                 break;
             case Direction.Right:
                 newHead.x += 1;
@@ -93,7 +94,7 @@ export default function Game(): JSX.Element {
         setSnake([newHead, ...snake.slice(0, -1)]);
         if (checkEatsFood(newHead, food, 2)) {
             setSnake([newHead, ...snake]);
-            setFood(randomFoodPosition(GAME_BOUNDS.xMax, GAME_BOUNDS.yMax));
+            setFood(randomFoodPosition(FOOD_SPAWN_BOUNDS.xMax, FOOD_SPAWN_BOUNDS.yMax));
             setScore(score + SCORE_INCREMENT);
         }
 
@@ -130,10 +131,6 @@ export default function Game(): JSX.Element {
         setIsPaused(false);
     }
 
-    function restartar(){
-        restart();
-    }
-
     const addFun = async () => {
         if (score > 0)
             await updateTamagochi({ ...pet, fun: (pet.fun + score / 2 <= 100 ? pet.fun + score / 2 : 100) })
@@ -151,9 +148,9 @@ export default function Game(): JSX.Element {
     return (
 
         <GestureHandlerRootView style={styles.GameContainer}>
-            <View style={{flexDirection: 'row', justifyContent: 'center', gap: 19, alignItems: 'center'}}>
-            <Pressable style={{height: 30, width: 60, backgroundColor: '#EFF59F', borderRadius: 16, justifyContent: 'center', alignContent: 'center', alignItems: 'center'}}onPress={() => setIsPaused(prevState => !prevState)}><Text>Pausar</Text></Pressable>
-            <Text style={{fontSize: 21, borderRadius: 12, backgroundColor: '#EFF59F', width: 109, height: 30,}}>Score: {score}</Text>
+            <View style={{ flexDirection: 'row', justifyContent: 'center', gap: 19, alignItems: 'center' }}>
+                <Pressable style={{ height: 30, width: 60, backgroundColor: '#EFF59F', borderRadius: 16, justifyContent: 'center', alignContent: 'center', alignItems: 'center' }} onPress={() => setIsPaused(prevState => !prevState)}><Text>Pausar</Text></Pressable>
+                <Text style={{ fontSize: 21, borderRadius: 12, backgroundColor: '#EFF59F', width: 109, height: 30, }}>Score: {score}</Text>
             </View>
             <PanGestureHandler onGestureEvent={handleGesture}>
                 <View style={styles.boundaries}>

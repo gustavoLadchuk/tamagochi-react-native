@@ -14,7 +14,7 @@ type pet = {
 
 /*################################################################################################*/
 
-const petList: pet[] =
+const avaiblePetsList: pet[] =
     [{
         iconImg: require(`@/assets/images/rabbit.png`),
         sprite: require('@/assets/images/coelho.png'),
@@ -62,13 +62,12 @@ const createTamagochi = () => {
     const { newTamagochi } = useDatabase()
 
     const handleSelectTamagochi = (index: number) => {
-        console.log(index)
         setSelectedPet(index)
     }
 
     const handleCreateTamagochi = async () => {
         try {
-            const response = await newTamagochi({ name: name, pet_id: selectedPet })
+            await newTamagochi({ name: name, pet_id: selectedPet })
             router.replace("/")
         } catch (error) {
             console.log(error)
@@ -91,7 +90,7 @@ const createTamagochi = () => {
                 </Text>
                 <View style={styles.petSelectionContainer}>
 
-                    {petList.map((item, index) => {
+                    {avaiblePetsList.map((item, index) => {
                         return (
                             <SelectPet
                                 index={index}
@@ -106,7 +105,7 @@ const createTamagochi = () => {
                 <View style={styles.petPreviewContainer}>
                     <ImageBackground source={require('@/assets/images/sala.jpg')} style={styles.petPreviewBackground} resizeMode="cover">
                         <View style={styles.tamagochiContainer}>
-                            <TamagochiSprite scale={5} TamagochiImage={petList[selectedPet].sprite} />
+                            <TamagochiSprite scale={5} TamagochiImage={avaiblePetsList[selectedPet].sprite} />
                         </View>
                     </ImageBackground>
 
@@ -168,13 +167,6 @@ const styles = StyleSheet.create({
     petPreviewBackground: {
         width: "100%",
         height: "100%"
-    },
-    bigTamagochiSprite: {
-        width: 300,
-        height: 300,
-        position: "absolute",
-        top: -30,
-        left: 12
     },
     tamagochiContainer: {
         position: "absolute",

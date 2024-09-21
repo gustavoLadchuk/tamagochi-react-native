@@ -27,9 +27,7 @@ export function useDatabase() {
         return response
     }
 
-    async function updateTamagochi({ hunger, sleep, fun, is_sleeping, id, last_update }:
-        { hunger: number, sleep: number, fun: number, is_sleeping: boolean, id: number, last_update: string }) {
-
+    function calculateTime(last_update: string) {
         const now = new Date()
 
         const formatedLastUpdate = new Date(last_update.replace(" ", "T"))
@@ -37,16 +35,33 @@ export function useDatabase() {
         const diferencaMilissegundos = now.getTime() + (now.getTimezoneOffset() * 1000 * 60) - formatedLastUpdate.getTime();
         const amount = Math.floor(diferencaMilissegundos / (1000 * 60 * 60));
 
-        const newHunger = hunger - amount >= 0 ? hunger - amount : 0
-        const newFun = fun - amount >= 0 ? fun - amount : 0
+        return amount
+    }
 
+    async function updateTamagochi({ hunger, sleep, fun, is_sleeping, id, last_update }:
+        { hunger: number, sleep: number, fun: number, is_sleeping: boolean, id: number, last_update: string }) {
+
+        const amount = calculateTime(last_update)
+
+        let newHunger: number
         let newSleep: number
+        let newFun: number
+
+        newHunger = hunger - amount
+
+        if (newHunger > 100) newHunger = 100
+        if (newHunger < 0) newHunger = 0
 
         if (is_sleeping) {
             newSleep = sleep + amount * 10 <= 100 ? sleep + amount * 10 : 100
         } else {
             newSleep = sleep - amount >= 0 ? sleep - amount : 0
         }
+
+        newFun = fun - amount
+
+        if (newFun > 100) newFun = 100
+        if (newFun < 0) newFun = 0
 
         const Query = await database.prepareAsync(`
             UPDATE pet SET hunger = $hunger, sleep = $sleep, fun = $fun, is_sleeping = $is_sleeping, last_update = CURRENT_TIMESTAMP WHERE id = $id
@@ -74,21 +89,6 @@ export function useDatabase() {
         }
 
     }
-
-    // async function killTamagochi() {
-
-    //     const Query = await database.prepareAsync(`
-    //         UPDATE pet SET hunger = $hunger, sleep = $sleep, fun = $fun WHERE id = $id
-    //         `)
-    //     try {
-    //         await Query.executeAsync({ $hunger: 0, $sleep: 0, $fun: 0, $id: 1 });
-    //     } catch (error) {
-    //         console.log(error);
-    //     } finally {
-    //         await Query.finalizeAsync().catch((error) => { console.log(error) });
-    //     }
-
-    // }
 
 
     return { newTamagochi, getTamagochis, getTamagochiById, updateTamagochi, deleteTamagochi }

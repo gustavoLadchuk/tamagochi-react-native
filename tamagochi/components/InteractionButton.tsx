@@ -3,8 +3,16 @@ import { Pressable, StyleSheet, Text, View } from "react-native";
 
 /*################################################################################################*/
 
-const InteractionButton = ({ id, room, eatFunc, sleepFunc, disabled }:
-    { id: number, room: number, eatFunc: () => void, sleepFunc: () => void, disabled?: boolean }) => {
+type props = {
+    id: number,
+    room: number,
+    eatFunc: () => void,
+    sleepFunc: () => void,
+    isLightsOff: boolean,
+    disabled?: boolean
+}
+
+const InteractionButton = ({ id, room, eatFunc, sleepFunc, isLightsOff, disabled }: props) => {
 
     const buttonProps = [
         {
@@ -18,7 +26,7 @@ const InteractionButton = ({ id, room, eatFunc, sleepFunc, disabled }:
             func: eatFunc
         },
         {
-            title: "Dormir",
+            title: isLightsOff ? "Acordar" : "Dormir",
             color: "#002975",
             func: sleepFunc
         }

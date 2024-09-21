@@ -35,20 +35,23 @@ const styles = StyleSheet.create({
     },
 })
 
-type prop = {
-    Imagemini: ImageSourcePropType,
-    Name: string
-    Path: string
+type props = {
+    imagemini: ImageSourcePropType,
+    name: string
+    path: games,
+    id: number
 }
 
-const MinigameChard = ({ Imagemini, Name, Path }: prop) => {
+type games = | "Snake" | "carStreet"
+
+const MinigameCard = ({ imagemini, name, path, id }: props) => {
     return (
-        <Link href={`/${Path}`}>
+        <Link href={`/${path}?id=${id}`}>
             <View style={styles.cardContainer}>
                 <View>
-                    <Image style={styles.MinigameImage} source={Imagemini} />
+                    <Image style={styles.MinigameImage} source={imagemini} />
                     <View style={styles.cardTextContainer}>
-                        <Text style={styles.minigameCardText}>{Name}</Text>
+                        <Text style={styles.minigameCardText}>{name}</Text>
                     </View>
 
                 </View>
@@ -57,4 +60,4 @@ const MinigameChard = ({ Imagemini, Name, Path }: prop) => {
     )
 }
 
-export default MinigameChard
+export default MinigameCard

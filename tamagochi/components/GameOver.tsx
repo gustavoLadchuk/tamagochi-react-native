@@ -1,4 +1,4 @@
-import { Button, StyleSheet, Text, View } from "react-native";
+import { Button, Pressable, StyleSheet, Text, View } from "react-native";
 
 /*################################################################################################*/
 
@@ -6,13 +6,28 @@ const styles = StyleSheet.create({
     gameOverScreen: {
         flex: 1,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        gap: 20,
+        backgroundColor: '#202020'
+    },
+    gameOverText: {
+        color: "white",
+        fontSize: 50,
+        fontWeight: "bold"
     },
     restartButton: {
-        width: 200,
-        height: 100,
-        backgroundColor: "green"
+        backgroundColor: "green",
+        padding: 10,
+        borderColor: "white",
+        borderWidth: 3,
+        borderRadius: 10,
+        justifyContent: "center",
+        alignItems: "center"
     },
+    restartButtonText: {
+        color: "white",
+        fontSize: 25
+    }
 })
 
 /*################################################################################################*/
@@ -25,8 +40,10 @@ const GameOver = ({ restart }: { restart: () => void }) => {
 
     return (
         <View style={styles.gameOverScreen}>
-            <Text>Game Over</Text>
-            <Button onPress={handleRestart} title='Reiniciar' />
+            <Text style={styles.gameOverText}>Game Over</Text>
+            <Pressable style={styles.restartButton} onPress={handleRestart}>
+                <Text style={styles.restartButtonText}>Reiniciar</Text>
+            </Pressable>
         </View>
     );
 }

@@ -1,6 +1,6 @@
-import { ActivityIndicator, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import Colors from '@/assets/constants/Colors';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 import InteractionButton from '@/components/InteractionButton';
 import { useFocusEffect, useLocalSearchParams } from 'expo-router';
 import StatusHeader from '@/components/StatusHeader';
@@ -18,8 +18,6 @@ export default function tamagochiDetails() {
 
     //UseStates
     const [loading, setLoading] = useState(true)
-    const [saving, setSaving] = useState(false)
-    const [sleeping, setSleeping] = useState(false)
     const [room, setRoom] = useState(0)
     const [pet, setPet] = useState<tamagochi>({
         "id": 0,
@@ -33,7 +31,7 @@ export default function tamagochiDetails() {
     });
 
     //Hooks
-    const { tamagochi: tamagochiId } = useLocalSearchParams()
+    const params = useLocalSearchParams()
     const { getTamagochiById, updateTamagochi } = useDatabase()
 
     useFocusEffect(
@@ -46,17 +44,19 @@ export default function tamagochiDetails() {
         }, [])
     );
 
+
+    //Functions
     const updateAtributes = async (pet: tamagochi) => {
         await updateTamagochi(pet)
     }
 
     const findTamagochi = async () => {
-        const response: tamagochi = await getTamagochiById(Number(tamagochiId))
-        setPet(response)
+        const response: tamagochi = await getTamagochiById(Number(params.id))
+
+        setPet({ ...response, is_sleeping: Boolean(response.is_sleeping) })
 
         if (response.is_sleeping) {
             setRoom(2)
-            setSleeping(true)
         }
 
         setLoading(false)
@@ -68,17 +68,12 @@ export default function tamagochiDetails() {
         let newRoom = room
 
         if (direction == "left") newRoom = newRoom - 1
-
         if (direction == "right") newRoom = newRoom + 1
 
-        console.log(newRoom < 0)
-
         if (newRoom < 0) newRoom = 2
-
         if (newRoom > 2) newRoom = 0
 
         setRoom(newRoom)
-
         updateTamagochi(pet)
 
     }
@@ -86,7 +81,6 @@ export default function tamagochiDetails() {
     const handleFeedButton = () => {
 
         let newHunger = pet.hunger + 10
-
         if (newHunger > 100) newHunger = 100
 
         setPet((pet) => ({
@@ -98,25 +92,18 @@ export default function tamagochiDetails() {
     }
 
     const handleSleepButton = () => {
-        setSaving(true)
-        if (sleeping) {
-            setSleeping(false)
-            updateAtributes({ ...pet, is_sleeping: false })
 
-        } else {
-            setSleeping(true)
-            updateAtributes({ ...pet, is_sleeping: true })
-        }
+        updateAtributes({ ...pet, is_sleeping: !pet.is_sleeping })
+        setPet({ ...pet, is_sleeping: !pet.is_sleeping })
 
-        setSaving(false)
     }
 
+    //Screen
     if (loading) {
         return (
-           <LoadingScreen />
+            <LoadingScreen />
         )
     }
-
 
     return (
         <View >
@@ -127,17 +114,15 @@ export default function tamagochiDetails() {
                 name={pet.name}
                 status={calculate(pet.hunger + pet.fun + pet.sleep)}
                 pet_id={pet.pet_id}
-                isLightOff={sleeping}
+                isLightOff={pet.is_sleeping}
             />
-
-
 
             <View style={styles.interactionContainer}>
 
                 <ChangeButton
                     direction={"left"}
                     func={changeRoom}
-                    disabled={saving || sleeping}
+                    disabled={pet.is_sleeping}
 
                 />
 
@@ -146,13 +131,13 @@ export default function tamagochiDetails() {
                     room={room}
                     eatFunc={handleFeedButton}
                     sleepFunc={handleSleepButton}
-                    disabled={saving}
+                    isLightsOff={pet.is_sleeping}
                 />
 
                 <ChangeButton
                     direction={"right"}
                     func={changeRoom}
-                    disabled={saving || sleeping}
+                    disabled={pet.is_sleeping}
                 />
 
             </View>
@@ -162,6 +147,8 @@ export default function tamagochiDetails() {
 }
 
 /*################################################################################################*/
+
+//Stylesheet
 
 export const styles = StyleSheet.create({
     statusIcon: {

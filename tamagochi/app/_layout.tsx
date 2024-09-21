@@ -32,7 +32,7 @@ export default function RootLayout() {
           <Stack.Screen name="index" options={{ headerShown: false }} />
           <Stack.Screen name="createTamagochi" options={{ headerShown: false }} />
           <Stack.Screen name="deleteTamagochi" options={{ headerShown: false }} />
-          <Stack.Screen name="[tamagochi]" options={{ headerShown: false }} />
+          <Stack.Screen name="tamagochiDetails" options={{ headerShown: false }} />
           <Stack.Screen name="jogos" options={{ headerShown: false }} />
           <Stack.Screen name="Snake" options={{ headerShown: false }} />
           <Stack.Screen name="carStreet" options={{ headerShown: false }} />

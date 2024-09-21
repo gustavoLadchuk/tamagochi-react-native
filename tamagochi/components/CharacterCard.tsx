@@ -5,6 +5,7 @@ import { Link, Redirect, router } from "expo-router";
 import Colors from '@/assets/constants/Colors';
 import { tamagochi } from './Types/types';
 import { calculate } from '@/assets/constants/statusCalculate';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 /*################################################################################################*/
 
@@ -40,7 +41,7 @@ const CharacterCard = ({ id, name, hunger, sleep, fun }: tamagochiCard) => {
     let imageCondition = images[status] || images.default;
 
     return (
-        <Link href={hunger + sleep + fun > 0 ? `/${id}` : "/deleteTamagochi"}>
+        <Link href={hunger + sleep + fun > 0 ? `/tamagochiDetails?id=${id}` : `/deleteTamagochi?id=${id}`}>
             <View style={styles.cardContainer}>
                 <View>
                     <Image style={styles.CardImage} source={imageCondition} />
@@ -48,21 +49,46 @@ const CharacterCard = ({ id, name, hunger, sleep, fun }: tamagochiCard) => {
 
 
 
-                <View style={{ justifyContent: 'center', alignContent: 'center', alignItems: 'center' }}>
+                <View style={styles.textContainer}>
                     <View>
                         <Text style={[{ color: TextColor }, styles.PetName]}>
                             {name}
                         </Text>
                     </View>
-                    <Text style={styles.CardText}>
-                        Fome: {hunger}%
-                    </Text>
-                    <Text style={styles.CardText}>
-                        Sono: {sleep}%
-                    </Text>
-                    <Text style={styles.CardText}>
-                        Diversão: {fun}%
-                    </Text>
+                    <View style={styles.statusContainer}>
+                        <View style={styles.infoStatus}>
+                            <MaterialCommunityIcons
+                                name="food-drumstick"
+                                size={20}
+                                color="white"
+                            />
+                            <Text style={styles.CardText}>
+                                {hunger}%
+                            </Text>
+                        </View>
+                        <View style={styles.infoStatus}>
+                            <MaterialCommunityIcons
+                                name="moon-waning-crescent"
+                                size={20}
+                                color="white"
+                            />
+                            <Text style={styles.CardText}>
+                                {sleep}%
+                            </Text>
+                        </View>
+                        <View style={styles.infoStatus}>
+                            <MaterialCommunityIcons
+                                name="gamepad-variant"
+                                size={20}
+                                color="white"
+                            />
+                            <Text style={styles.CardText}>
+                                {fun}%
+                            </Text>
+                        </View>
+
+                    </View>
+
                     <Text style={styles.CardText}>
                         Status:  {status}
                     </Text>
@@ -83,7 +109,7 @@ const styles = StyleSheet.create({
         width: 180,
         height: 300,
         alignItems: 'center',
-        gap: 50,
+        gap: 30,
         borderWidth: 3,
         padding: 10,
         borderRadius: 10
@@ -100,6 +126,21 @@ const styles = StyleSheet.create({
         marginBottom: 20,
         fontSize: 20,
         fontWeight: 'bold',
+    },
+    textContainer: {
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    statusContainer: {
+        justifyContent: "space-around",
+        alignItems: "center",
+        flexDirection: "row",
+        width: "100%",
+        marginBottom: 10
+    },
+    infoStatus: {
+        justifyContent: "center",
+        alignItems: "center"
     }
 })
 

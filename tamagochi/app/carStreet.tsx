@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Image,StyleSheet, Text, View } from 'react-native';
+import { Image, StyleSheet, Text, View } from 'react-native';
 import { Gyroscope } from 'expo-sensors';
 import { useLocalSearchParams } from 'expo-router';
 import { useDatabase } from '@/hooks/useDatabase';
 import { tamagochi } from '@/components/Types/types';
 import GameOver from '@/components/GameOver';
+import { Subscription } from 'expo-sensors/build/Pedometer';
 
 /*################################################################################################*/
 
@@ -75,23 +76,19 @@ export default function carStreet() {
     const [obstacleType, setObstacleType] = useState(1)
 
     const minPositionY = -520
-
     const maxPositionY = 800
-
     const minPositionX = -100
 
     const [obstaclePositionX, setObstaclePositionX] = useState(minPositionX)
-
     const [obstaclePositionY, setObstaclePositionY] = useState(minPositionY)
 
     const [speed, setSpeed] = useState(10)
-
     const [score, setScore] = useState(0)
-
 
     const [position, setPosition] = useState(0)
 
     useEffect(() => {
+        findTamagochi()
 
         const subscription = Gyroscope.addListener((data) => {
             setGyroscopeData(data);
@@ -101,34 +98,12 @@ export default function carStreet() {
         Gyroscope.setUpdateInterval(16);
 
         return () => subscription.remove();
+
     }, []);
 
-    const checkColision = () => {
-        if (obstaclePositionY > 10) {
-
-            if (obstacleType == 3 && obstaclePositionY < 280) {
-                if (position < -25 || position > 45) {
-                    setRunning(false)
-                }
-            }
-
-            if (obstacleType == 2 && obstaclePositionY < 360) {
-                if ((obstaclePositionX <= 50 && position < 25) || (obstaclePositionX > 50 && position > -25)) {
-                    setRunning(false)
-                }
-            }
-
-            if (obstacleType == 1 && obstaclePositionY < 280) {
-                if (position > obstaclePositionX - 65 && position < obstaclePositionX + 60) {
-                    setRunning(false)
-                }
-            }
-        }
-    }
-
     useEffect(() => {
-        const carSpeed = 5
-        const movement = -gyroscopeData.z * carSpeed
+        const carMovementSpeed = 5
+        const movement = -gyroscopeData.z * carMovementSpeed
         const max = 100
 
         if (isRunning) {
@@ -153,14 +128,33 @@ export default function carStreet() {
 
     }, [gyroscopeData.z])
 
+    const checkColision = () => {
+        if (obstaclePositionY > 10) {
+
+            if (obstacleType == 3 && obstaclePositionY < 280) {
+                if (position < -25 || position > 45) {
+                    setRunning(false)
+                }
+            }
+
+            if (obstacleType == 2 && obstaclePositionY < 360) {
+                if ((obstaclePositionX <= 50 && position < 25) || (obstaclePositionX > 50 && position > -25)) {
+                    setRunning(false)
+                }
+            }
+
+            if (obstacleType == 1 && obstaclePositionY < 280) {
+                if (position > obstaclePositionX - 65 && position < obstaclePositionX + 60) {
+                    setRunning(false)
+                }
+            }
+        }
+    }
+
     const findTamagochi = async () => {
         const pet = await getTamagochiById(Number(params.id))
         setPet(pet)
     }
-
-    useEffect(() => {
-        findTamagochi()
-    }, [])
 
     const restart = () => {
         if (!isRunning) {
@@ -174,31 +168,35 @@ export default function carStreet() {
     }
 
     const addFun = async () => {
+
+        let newFun = pet.fun + score / 2
+
+        if (score > 100) newFun = 100
+
         if (score > 0)
-            await updateTamagochi({ ...pet, fun: (pet.fun + score / 2 <= 100 ? pet.fun + score / 2 : 100) })
+            await updateTamagochi({ ...pet, fun: newFun })
     }
 
     if (!isRunning) {
         addFun()
-    }
-
-    if (isRunning) {
         return (
-            <View style={styles.container}>
-                <View style={styles.road}>
-                    <Text style={styles.scoreText}>{score}</Text>
-                    <Obstacle type={obstacleType} positionX={obstaclePositionX} positionY={obstaclePositionY} />
-                    <Image source={require("@/assets/images/carro.png")} style={[styles.car, { left: (position) }]} />
-                </View>
-            </View>
-        );
+            <GameOver restart={restart} />
+        )
     }
     return (
-        <GameOver restart={restart} />
-    )
-
-
+        <View style={styles.container}>
+            <View style={styles.road}>
+                <Text style={styles.scoreText}>{score}</Text>
+                <Obstacle type={obstacleType} positionX={obstaclePositionX} positionY={obstaclePositionY} />
+                <Image source={require("@/assets/images/carro.png")} style={[styles.car, { left: (position) }]} />
+            </View>
+        </View>
+    );
 }
+
+
+
+
 
 const styles = StyleSheet.create({
     container: {

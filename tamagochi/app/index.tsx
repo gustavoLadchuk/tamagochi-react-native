@@ -4,6 +4,7 @@ import Header from "@/components/Header";
 import LoadingScreen from "@/components/LoadingScreen";
 import { tamagochi } from "@/components/Types/types";
 import { useDatabase } from "@/hooks/useDatabase";
+import { Ionicons } from "@expo/vector-icons";
 import { Link, useFocusEffect } from "expo-router";
 import React, { useCallback, useEffect, useState } from "react";
 import { View, Text, Button, StyleSheet, Pressable, ActivityIndicator } from 'react-native';
@@ -59,9 +60,7 @@ const index = () => {
             <View style={styles.buttonContainer}>
 
                 <Link href={"/createTamagochi"}>
-                    <View style={styles.buttonView}>
-                        <Text>Novo Tamagochi</Text>
-                    </View>
+                    <Ionicons name="add-circle-outline" size={40} color="black" />
                 </Link>
 
             </View>
