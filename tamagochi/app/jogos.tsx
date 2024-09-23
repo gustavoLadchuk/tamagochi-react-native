@@ -2,7 +2,7 @@ import Colors from "@/assets/constants/Colors"
 import Header from "@/components/Header"
 import MinigameCard from "@/components/MinigameCard"
 import { useLocalSearchParams } from "expo-router"
-import { View, StyleSheet, Text, Button, Pressable } from "react-native"
+import { View, StyleSheet } from "react-native"
 
 /*################################################################################################*/
 

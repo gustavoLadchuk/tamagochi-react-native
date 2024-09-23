@@ -6,8 +6,8 @@ import { tamagochi } from "@/components/Types/types";
 import { useDatabase } from "@/hooks/useDatabase";
 import { Ionicons } from "@expo/vector-icons";
 import { Link, useFocusEffect } from "expo-router";
-import React, { useCallback, useEffect, useState } from "react";
-import { View, Text, Button, StyleSheet, Pressable, ActivityIndicator } from 'react-native';
+import React, { useCallback, useState } from "react";
+import { View, StyleSheet } from 'react-native';
 import { FlatList } from "react-native";
 
 /*################################################################################################*/

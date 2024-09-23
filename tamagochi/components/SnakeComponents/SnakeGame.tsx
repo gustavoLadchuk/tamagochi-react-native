@@ -70,7 +70,7 @@ export default function Game(): JSX.Element {
         const newHead = { ...snakeHead }
 
         //game over
-        if (checkGameOver(snakeHead, GAME_BOUNDS)) {
+        if (checkGameOver(snake, GAME_BOUNDS)) {
             setIsGameOver((prev => !prev));
             return;
         }
@@ -104,18 +104,18 @@ export default function Game(): JSX.Element {
         const { translationX, translationY } = event.nativeEvent
 
         if (Math.abs(translationX) > Math.abs(translationY)) {
-            if (translationX > 0) {
+            if (translationX > 0 && direction != Direction.Left) {
                 //moves RIGHT
                 setDirection(Direction.Right);
-            } else {
+            } else if (translationX < 0 && direction != Direction.Right) {
                 //moves LEFT
                 setDirection(Direction.Left);
             }
         } else {
-            if (translationY > 0) {
+            if (translationY > 0 && direction != Direction.Up) {
                 //moves DOWN
                 setDirection(Direction.Down);
-            } else {
+            } else if (translationY < 0 && direction != Direction.Down) {
                 //moves UP
                 setDirection(Direction.Up);
             }

@@ -6,7 +6,7 @@ import 'react-native-reanimated';
 
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { SQLiteProvider } from 'expo-sqlite';
-import { initDatabase } from './Database/initDatabase';
+import { initDatabase } from '../Database/initDatabase';
 
 SplashScreen.preventAutoHideAsync();
 

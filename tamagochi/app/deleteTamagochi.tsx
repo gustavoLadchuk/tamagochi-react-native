@@ -1,6 +1,6 @@
 import { useDatabase } from "@/hooks/useDatabase";
 import { router, useLocalSearchParams } from "expo-router";
-import { Button, Image, Pressable, StyleSheet, Text, View } from "react-native";
+import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 
 
 const styles = StyleSheet.create({
