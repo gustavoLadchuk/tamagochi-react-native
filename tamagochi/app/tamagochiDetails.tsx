@@ -74,7 +74,7 @@ export default function tamagochiDetails() {
         if (newRoom > 2) newRoom = 0
 
         setRoom(newRoom)
-        updateTamagochi(pet)
+
 
     }
 

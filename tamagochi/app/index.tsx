@@ -23,16 +23,15 @@ const index = () => {
 
     const searchTamagochis = async () => {
 
-        const oldPets = await getTamagochis()
+        const oldPets = await getTamagochis() //pega o tamagochi desatualizado
 
         oldPets.forEach(async (item) => {
-            updateTamagochi(item)
+            updateTamagochi(item)//atualiza todos os tamagochis
         })
 
-        const newPets = await getTamagochis()
+        const newPets = await getTamagochis()//pega os tamagochis atualizados
 
         setPetList(newPets)
-
         setLoading(false)
     }
 

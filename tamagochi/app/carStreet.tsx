@@ -120,12 +120,8 @@ export default function carStreet() {
                 setObstacleType(Math.floor(Math.random() * 3) + 1)
                 setSpeed(speed + 0.1)
             }
-
-
         }
-
         checkColision()
-
     }, [gyroscopeData.z])
 
     const checkColision = () => {
@@ -169,12 +165,8 @@ export default function carStreet() {
 
     const addFun = async () => {
 
-        let newFun = pet.fun + score / 2
-
-        if (score > 100) newFun = 100
-
         if (score > 0)
-            await updateTamagochi({ ...pet, fun: newFun })
+            await updateTamagochi({ ...pet, fun: pet.fun + score / 2 })
     }
 
     if (!isRunning) {
