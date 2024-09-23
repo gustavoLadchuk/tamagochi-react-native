@@ -71,11 +71,7 @@ const index = () => {
                 renderItem={({ item, index }) => {
                     return (
                         <CharacterCard
-                            id={item.id}
-                            name={item.name}
-                            hunger={item.hunger}
-                            sleep={item.sleep}
-                            fun={item.fun}
+                            pet={item}
                             key={index}
                         />
                     )

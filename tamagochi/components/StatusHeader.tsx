@@ -31,7 +31,7 @@ const StatusHeader = ({ pet }: { pet: tamagochi }) => {
             <View style={{ flexDirection: "row", width: "50%", justifyContent: "space-around" }}>
                 <StatusInfo icon={"food-drumstick"} color={"#753100"} percentage={pet.hunger} />
                 <StatusInfo icon={"moon-waning-crescent"} color={"#002975"} percentage={pet.sleep} />
-                <StatusInfo icon={"gamepad-variant"} color={"#07cc00"} percentage={pet.fun} />
+                <StatusInfo icon={"emoticon-happy-outline"} color={"#07cc00"} percentage={pet.fun} />
             </View>
             <View style={styles.petNameContainer}>
                 <Text style={styles.petName}>{pet.name}</Text>

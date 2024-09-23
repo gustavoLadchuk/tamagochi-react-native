@@ -1,3 +1,4 @@
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Link } from "expo-router";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 
@@ -12,21 +13,26 @@ type props = {
     disabled?: boolean
 }
 
+type buttonProps = {
+    iconName: | 'gamepad-variant' | 'silverware-fork-knife' | 'lightbulb' | 'lightbulb-outline',
+    color: string,
+    func?: () => void
+}
+
 const InteractionButton = ({ id, room, eatFunc, sleepFunc, isLightsOff, disabled }: props) => {
 
-    const buttonProps = [
+    const buttonProps: buttonProps[] = [
         {
-            title: "Brincar",
-            color: "#07cc00",
-            func: null
+            iconName: "gamepad-variant",
+            color: "#07cc00"
         },
         {
-            title: "Comer",
+            iconName: "silverware-fork-knife",
             color: "#753100",
             func: eatFunc
         },
         {
-            title: isLightsOff ? "Acordar" : "Dormir",
+            iconName: isLightsOff ? "lightbulb" : "lightbulb-outline",
             color: "#002975",
             func: sleepFunc
         }
@@ -45,14 +51,14 @@ const InteractionButton = ({ id, room, eatFunc, sleepFunc, isLightsOff, disabled
         if (disabled)
             return (
                 <View style={[styles.button, { backgroundColor: buttonProps[room].color }]}>
-                    <Text style={styles.buttonText}>{buttonProps[room].title}</Text>
+                    <MaterialCommunityIcons name={buttonProps[room].iconName} size={40} color="white" />
                 </View>
             )
 
         return (
             <Link href={`/jogos?id=${id}`}>
                 <View style={[styles.button, { backgroundColor: buttonProps[room].color }]}>
-                    <Text style={styles.buttonText}>{buttonProps[room].title}</Text>
+                    <MaterialCommunityIcons name={buttonProps[room].iconName} size={40} color="white" />
                 </View>
             </Link>
         )
@@ -61,7 +67,7 @@ const InteractionButton = ({ id, room, eatFunc, sleepFunc, isLightsOff, disabled
     return (
         <Pressable onPress={handlePressButton} disabled={disabled}>
             <View style={[styles.button, { backgroundColor: buttonProps[room].color }]}>
-                <Text style={styles.buttonText}>{buttonProps[room].title}</Text>
+                <MaterialCommunityIcons name={buttonProps[room].iconName} size={40} color="white" />
             </View>
         </Pressable>
     );

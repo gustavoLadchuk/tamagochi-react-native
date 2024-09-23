@@ -20,11 +20,11 @@ type tamagochiCard = {
 
 /*################################################################################################*/
 //Componente para mostrar o bichinho na tela de seleção
-const CharacterCard = ({ id, name, hunger, sleep, fun }: tamagochiCard) => {
+const CharacterCard = ({ pet }: { pet: tamagochi }) => {
 
     //Váriveis de cor de texto, função para calcular o status, e a imagem de condição
     let TextColor = 'white';
-    const status = calculate(hunger + sleep + fun)
+    const status = calculate(pet.hunger + pet.sleep + pet.fun)
 
     const images = {
         "Morto": require('@/assets/images/PetIsDead.jpeg'),
@@ -37,22 +37,30 @@ const CharacterCard = ({ id, name, hunger, sleep, fun }: tamagochiCard) => {
         default: require("@/assets/images/PetIsHappy.jpeg"),
     }
 
+    const petImages =
+        [
+            require(`@/assets/images/rabbit.png`),
+            require(`@/assets/images/mouse.png`),
+            require(`@/assets/images/reptile.png`)
+        ]
+
     //Condição para mudar a imagem do bichinho
     let imageCondition = images[status] || images.default;
 
     return (
-        <Link href={hunger + sleep + fun > 0 ? `/tamagochiDetails?id=${id}` : `/deleteTamagochi?id=${id}`}>
+        <Link href={pet.hunger + pet.sleep + pet.fun > 0 ? `/tamagochiDetails?id=${pet.id}` : `/deleteTamagochi?id=${pet.id}`}>
             <View style={styles.cardContainer}>
-                <View>
-                    <Image style={styles.CardImage} source={imageCondition} />
+                <View style={{ alignItems: "flex-end", width: "100%" }}>
+                    <Image style={styles.StatusImage} source={imageCondition} />
                 </View>
-
-
+                <View>
+                    <Image style={styles.CardImage} source={petImages[pet.pet_id]} />
+                </View>
 
                 <View style={styles.textContainer}>
                     <View>
                         <Text style={[{ color: TextColor }, styles.PetName]}>
-                            {name}
+                            {pet.name}
                         </Text>
                     </View>
                     <View style={styles.statusContainer}>
@@ -63,7 +71,7 @@ const CharacterCard = ({ id, name, hunger, sleep, fun }: tamagochiCard) => {
                                 color="white"
                             />
                             <Text style={styles.CardText}>
-                                {hunger}%
+                                {pet.hunger}%
                             </Text>
                         </View>
                         <View style={styles.infoStatus}>
@@ -73,7 +81,7 @@ const CharacterCard = ({ id, name, hunger, sleep, fun }: tamagochiCard) => {
                                 color="white"
                             />
                             <Text style={styles.CardText}>
-                                {sleep}%
+                                {pet.sleep}%
                             </Text>
                         </View>
                         <View style={styles.infoStatus}>
@@ -83,7 +91,7 @@ const CharacterCard = ({ id, name, hunger, sleep, fun }: tamagochiCard) => {
                                 color="white"
                             />
                             <Text style={styles.CardText}>
-                                {fun}%
+                                {pet.fun}%
                             </Text>
                         </View>
 
@@ -109,7 +117,7 @@ const styles = StyleSheet.create({
         width: 180,
         height: 300,
         alignItems: 'center',
-        gap: 30,
+        gap: 15,
         borderWidth: 3,
         padding: 10,
         borderRadius: 10
@@ -118,6 +126,11 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         width: 100,
         height: 100,
+    },
+    StatusImage: {
+        borderRadius: 5,
+        width: 25,
+        height: 25,
     },
     CardText: {
         color: 'white',

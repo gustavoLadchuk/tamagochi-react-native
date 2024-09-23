@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
 type icons =
     | "food-drumstick"
     | "moon-waning-crescent"
-    | "gamepad-variant"
+    | "emoticon-happy-outline"
 
 
 type statusIcon = {
