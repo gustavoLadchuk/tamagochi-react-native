@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
         borderWidth: 3,
         borderRadius: 5,
         alignItems: "center",
-        justifyContent: "center",
+        justifyContent: "flex-end",
         borderColor: "white"
     },
     statContainer: {
@@ -20,6 +20,14 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
         fontSize: 18
     },
+    iconContainer: {
+        position: "absolute",
+        justifyContent: "center",
+        alignItems: "center",
+        width: "100%",
+        height: "100%",
+        top: 0
+    }
 })
 
 type icons =
@@ -36,16 +44,19 @@ type statusIcon = {
 
 const StatusInfo = ({ icon, color, percentage }: statusIcon) => {
     return (
-        <View style={styles.statContainer}>
-            <View style={[styles.statusIcon, { backgroundColor: color }]}>
+
+        <View style={[styles.statusIcon, { backgroundColor: "black" }]}>
+            <View style={{ width: "100%", height: `${percentage}%`, backgroundColor: color }} />
+            <View style={styles.iconContainer}>
                 <MaterialCommunityIcons
                     name={icon}
                     size={40}
                     color="white"
                 />
             </View>
-            <Text style={styles.statusText}>{percentage}%</Text>
+
         </View>
+
     )
 }
 

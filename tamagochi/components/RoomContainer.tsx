@@ -1,7 +1,8 @@
 import React from "react";
 import { View, ImageBackground, StyleSheet } from "react-native";
-import PetInfo from "./PetInfo";
 import TamagochiSprite from "./TamagochiSprite";
+import PetDetails from "./PetDetails";
+import { tamagochi } from "./Types/types";
 
 const styles = StyleSheet.create({
     lightOff: {
@@ -19,11 +20,17 @@ const styles = StyleSheet.create({
     },
 })
 
+type props = {
+    room: number,
+    pet: tamagochi,
+    isLightOff: boolean,
+    isShowingDetails: boolean
+}
+
 
 /*################################################################################################*/
 
-export const RoomContainer = ({ room, name, status, pet_id, isLightOff }:
-    { room: number, name: string, status: string, pet_id: number, isLightOff: boolean }) => {
+export const RoomContainer = ({ room, pet, isLightOff, isShowingDetails }: props) => {
 
 
 
@@ -65,10 +72,15 @@ export const RoomContainer = ({ room, name, status, pet_id, isLightOff }:
             <ImageBackground resizeMode='cover' style={styles.background} source={roomData[room].image}>
 
                 <View style={{ position: "absolute", left: roomData[room].petX, top: roomData[room].petY }}>
-                    <TamagochiSprite scale={6} TamagochiImage={isLightOff ? petImages[pet_id].sleeping : petImages[pet_id].normal} />
+                    <TamagochiSprite scale={6} TamagochiImage={isLightOff ? petImages[pet.pet_id].sleeping : petImages[pet.pet_id].normal} />
                 </View>
                 <View style={[styles.lightOff, { backgroundColor: `rgba(0, 0, 0, ${isLightOff ? 0.7 : 0})` }]} />
-                <PetInfo name={name} status={status} />
+                {isShowingDetails ?
+                    <PetDetails pet={pet} />
+                    :
+                    <></>
+                }
+
             </ImageBackground>
         </View>
     )

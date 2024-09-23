@@ -1,6 +1,7 @@
 import Colors from "@/assets/constants/Colors";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import StatusInfo from "./StatusInfo";
+import { tamagochi } from "./Types/types";
 
 const styles = StyleSheet.create({
 
@@ -8,25 +9,34 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.darkYellow,
         width: "100%",
         height: 80,
-        justifyContent: "space-around",
+        justifyContent: "center",
         flexDirection: "row",
         alignItems: "center",
         alignSelf: 'center',
-    }
+    },
+    petNameContainer: {
+        alignItems: "center",
+        width: "50%"
+    },
+    petName: {
+        fontSize: 30,
+        color: "white",
+        fontWeight: "bold"
+    },
 })
 
-type tamagochiAtributes = {
-    hunger: number,
-    sleep: number,
-    fun: number
-}
-
-const StatusHeader = ({ hunger, sleep, fun }: tamagochiAtributes) => {
+const StatusHeader = ({ pet }: { pet: tamagochi }) => {
     return (
         <View style={styles.statusContainer}>
-            <StatusInfo icon={"food-drumstick"} color={"#753100"} percentage={hunger} />
-            <StatusInfo icon={"moon-waning-crescent"} color={"#002975"} percentage={sleep} />
-            <StatusInfo icon={"gamepad-variant"} color={"#07cc00"} percentage={fun} />
+            <View style={{ flexDirection: "row", width: "50%", justifyContent: "space-around" }}>
+                <StatusInfo icon={"food-drumstick"} color={"#753100"} percentage={pet.hunger} />
+                <StatusInfo icon={"moon-waning-crescent"} color={"#002975"} percentage={pet.sleep} />
+                <StatusInfo icon={"gamepad-variant"} color={"#07cc00"} percentage={pet.fun} />
+            </View>
+            <View style={styles.petNameContainer}>
+                <Text style={styles.petName}>{pet.name}</Text>
+            </View>
+
         </View>
     );
 }

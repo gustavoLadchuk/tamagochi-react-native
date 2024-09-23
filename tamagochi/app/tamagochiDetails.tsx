@@ -1,4 +1,4 @@
-import { StyleSheet, View } from 'react-native';
+import { Pressable, StyleSheet, View } from 'react-native';
 import Colors from '@/assets/constants/Colors';
 import { useCallback, useState } from 'react';
 import InteractionButton from '@/components/InteractionButton';
@@ -6,7 +6,6 @@ import { useFocusEffect, useLocalSearchParams } from 'expo-router';
 import StatusHeader from '@/components/StatusHeader';
 import { useDatabase } from '@/hooks/useDatabase';
 import { changeButtonDirection, tamagochi } from '@/components/Types/types';
-import { calculate } from '@/assets/constants/statusCalculate';
 import ChangeButton from '@/components/ChangeButton';
 import { RoomContainer } from '@/components/RoomContainer';
 import LoadingScreen from '@/components/LoadingScreen';
@@ -19,6 +18,7 @@ export default function tamagochiDetails() {
     //UseStates
     const [loading, setLoading] = useState(true)
     const [room, setRoom] = useState(0)
+    const [isShowingDetails, setIsShowingDetails] = useState(false)
     const [pet, setPet] = useState<tamagochi>({
         "id": 0,
         "name": "",
@@ -98,6 +98,10 @@ export default function tamagochiDetails() {
 
     }
 
+    const changeShowingDetails = () => {
+        setIsShowingDetails(!isShowingDetails)
+    }
+
     //Screen
     if (loading) {
         return (
@@ -107,13 +111,15 @@ export default function tamagochiDetails() {
 
     return (
         <View >
-            <StatusHeader hunger={pet.hunger} sleep={pet.sleep} fun={pet.fun} />
+            <Pressable onPress={changeShowingDetails}>
+                <StatusHeader pet={pet} />
+            </Pressable>
+
 
             <RoomContainer
                 room={room}
-                name={pet.name}
-                status={calculate(pet.hunger + pet.fun + pet.sleep)}
-                pet_id={pet.pet_id}
+                pet={pet}
+                isShowingDetails={isShowingDetails}
                 isLightOff={pet.is_sleeping}
             />
 
