@@ -1,7 +1,7 @@
 import { Pressable, StyleSheet, View, } from "react-native";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import Colors from "@/assets/constants/Colors";
-import { changeButtonDirection } from "./Types/types";
+import { changeButtonDirection } from "../Types/types";
 
 
 const styles = StyleSheet.create({

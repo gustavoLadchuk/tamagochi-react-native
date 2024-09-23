@@ -3,7 +3,7 @@ import {StyleSheet, Text} from 'react-native'
 
 /*################################################################################################*/
 
-export default function Food({x,y}: coordinate): JSX.Element {
+export default function Food({x,y}: coordinate): JSX.Element { //pega 
     return <Text style={[{top: y * 10, left: x * 10}, styles.food]}>🍎</Text> 
 }
 

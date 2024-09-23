@@ -2,7 +2,7 @@ import React from "react";
 import { View, ImageBackground, StyleSheet } from "react-native";
 import TamagochiSprite from "./TamagochiSprite";
 import PetDetails from "./PetDetails";
-import { tamagochi } from "./Types/types";
+import { tamagochi } from "../Types/types";
 
 const styles = StyleSheet.create({
     lightOff: {

@@ -12,9 +12,12 @@ interface snakeProps {
 
 /*################################################################################################*/
 
+
 export default function Snake ({snake}: snakeProps): JSX.Element {
+    // a classe Fragment, agrupa elementos sem precisar de um wrapper (Uma View).
+    //a cobra é um agrupamento enorme de views.
     return (
-        <Fragment>
+        <Fragment> 
             {snake.map((segment: coordinate,index:number) => {
                 const segmentStyle = {
                     left: segment.x * 10,

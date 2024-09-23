@@ -4,7 +4,7 @@ import { Gyroscope } from 'expo-sensors';
 import { useLocalSearchParams } from 'expo-router';
 import { useDatabase } from '@/hooks/useDatabase';
 import { tamagochi } from '@/components/Types/types';
-import GameOver from '@/components/GameOver';
+import GameOver from '@/components/GeneralComponents/GameOver';
 import { Subscription } from 'expo-sensors/build/Pedometer';
 
 /*################################################################################################*/

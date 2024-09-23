@@ -1,14 +1,14 @@
 import { Pressable, StyleSheet, View } from 'react-native';
 import Colors from '@/assets/constants/Colors';
 import { useCallback, useState } from 'react';
-import InteractionButton from '@/components/InteractionButton';
+import InteractionButton from '@/components/GeneralComponents/InteractionButton';
 import { useFocusEffect, useLocalSearchParams } from 'expo-router';
-import StatusHeader from '@/components/StatusHeader';
+import StatusHeader from '@/components/TamagochiComponents/StatusHeader';
 import { useDatabase } from '@/hooks/useDatabase';
 import { changeButtonDirection, tamagochi } from '@/components/Types/types';
-import ChangeButton from '@/components/ChangeButton';
-import { RoomContainer } from '@/components/RoomContainer';
-import LoadingScreen from '@/components/LoadingScreen';
+import ChangeButton from '@/components/GeneralComponents/ChangeButton';
+import { RoomContainer } from '@/components/TamagochiComponents/RoomContainer';
+import LoadingScreen from '@/components/GeneralComponents/LoadingScreen';
 
 /*################################################################################################*/
 

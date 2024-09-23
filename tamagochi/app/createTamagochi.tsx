@@ -1,7 +1,7 @@
-import Header from "@/components/Header";
+import Header from "@/components/GeneralComponents/Header";
 import { Button, StyleSheet, Text, TextInput, View, Image, Pressable, ImageSourcePropType, ImageBackground, ScrollView } from "react-native";
 import { useState } from "react";
-import TamagochiSprite from "@/components/TamagochiSprite";
+import TamagochiSprite from "@/components/TamagochiComponents/TamagochiSprite";
 import { useDatabase } from "@/hooks/useDatabase";
 import { router } from "expo-router";
 

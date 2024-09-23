@@ -1,7 +1,7 @@
 import Colors from "@/assets/constants/Colors";
 import { StyleSheet, Text, View } from "react-native";
 import StatusInfo from "./StatusInfo";
-import { tamagochi } from "./Types/types";
+import { tamagochi } from "../Types/types";
 
 const styles = StyleSheet.create({
 
