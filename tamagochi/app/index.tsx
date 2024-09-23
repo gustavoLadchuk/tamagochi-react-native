@@ -1,7 +1,7 @@
 import Colors from "@/assets/constants/Colors";
-import CharacterCard from "@/components/CharacterCard";
-import Header from "@/components/Header";
-import LoadingScreen from "@/components/LoadingScreen";
+import CharacterCard from "@/components/GeneralComponents/CharacterCard";
+import Header from "@/components/GeneralComponents/Header";
+import LoadingScreen from "@/components/GeneralComponents/LoadingScreen";
 import { tamagochi } from "@/components/Types/types";
 import { useDatabase } from "@/hooks/useDatabase";
 import { Ionicons } from "@expo/vector-icons";
@@ -56,11 +56,11 @@ const index = () => {
 
     return (
         <View style={styles.pageView}>
-            <Header title="Seus Tamagochis" color="slateblue" />
+            <Header title="Seus Tamagochis" color={Colors.darkYellow} />
             <View style={styles.buttonContainer}>
 
                 <Link href={"/createTamagochi"}>
-                    <Ionicons name="add-circle-outline" size={40} color="black" />
+                    <Ionicons name="add-circle-outline" size={40} color="white" />
                 </Link>
 
             </View>
@@ -92,7 +92,8 @@ const styles = StyleSheet.create({
     pageView: {
         flex: 1,
         alignItems: "center",
-        gap: 10
+        gap: 10,
+        backgroundColor: '#9966FF'
     },
     buttonContainer: {
         alignItems: "center",

@@ -5,7 +5,17 @@ import { StyleSheet, Text, View } from 'react-native'
 
 type headerProps = {
     title: string,
-    color: string
+    color: string,
+}
+
+/*################################################################################################*/
+
+const Header = ({ title, color}: headerProps) => {
+    return (
+        <View style={[style.HeaderContainer, { backgroundColor: color, }]}>
+            <Text style={style.HeaderText}>{title}</Text>
+        </View>
+    );
 }
 
 /*################################################################################################*/
@@ -18,17 +28,8 @@ const style = StyleSheet.create({
     },
     HeaderText: {
         fontWeight: "bold",
-        color: "white"
+        color: 'white',
+        fontSize: 25,
     },
 })
-const Header = ({ title, color }: headerProps) => {
-    return (
-        <View style={[style.HeaderContainer, { backgroundColor: color, }]}>
-            <Text style={style.HeaderText}>{title}</Text>
-        </View>
-    );
-}
-
-/*################################################################################################*/
-
 export default Header;

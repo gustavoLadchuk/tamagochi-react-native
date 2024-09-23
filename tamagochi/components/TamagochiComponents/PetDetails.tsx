@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from "react-native";
-import { tamagochi } from "./Types/types";
+import { tamagochi } from "../Types/types";
 import { calculate } from "@/assets/constants/statusCalculate";
 
 const styles = StyleSheet.create({

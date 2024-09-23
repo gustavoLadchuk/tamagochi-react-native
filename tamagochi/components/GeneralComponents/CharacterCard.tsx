@@ -3,7 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { Button, Image, ImageSourcePropType, Linking, StyleSheet, Text, View } from "react-native";
 import { Link, Redirect, router } from "expo-router";
 import Colors from '@/assets/constants/Colors';
-import { tamagochi } from './Types/types';
+import { tamagochi } from '../Types/types';
 import { calculate } from '@/assets/constants/statusCalculate';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
@@ -44,7 +44,7 @@ const CharacterCard = ({ pet }: { pet: tamagochi }) => {
             require(`@/assets/images/reptile.png`)
         ]
 
-    //Condição para mudar a imagem do bichinho
+    //Condição para mudar a imagem do bichinho, ou a imagem padrão.
     let imageCondition = images[status] || images.default;
 
     return (
@@ -113,12 +113,13 @@ const CharacterCard = ({ pet }: { pet: tamagochi }) => {
 const styles = StyleSheet.create({
     cardContainer: {
         marginTop: 50,
-        backgroundColor: Colors.lavenderPurple,
+        backgroundColor: "#BF00FF",
         width: 180,
         height: 300,
         alignItems: 'center',
         gap: 15,
         borderWidth: 3,
+        borderColor: "#FF00FF",
         padding: 10,
         borderRadius: 10
     },
